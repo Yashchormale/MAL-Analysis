@@ -1,0 +1,2153 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:">
+<title>MAL v4.0 - app-release.apk</title><style>
+:root{--bg:#080b12;--panel:#101621;--panel2:#151d2a;--border:#253044;--text:#e8edf7;--muted:#8e9bb0;
+--accent:#63a4ff;--good:#35d07f;--warn:#f4c95d;--bad:#ff6577;--crit:#ff3d68}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(135deg,#070a10,#0b111b 45%,#080b12);color:var(--text);
+font-family:Inter,Segoe UI,Arial,sans-serif;font-size:14px}
+a{color:#75b3ff;text-decoration:none}a:hover{text-decoration:underline}
+.app{display:flex;min-height:100vh}
+.sidebar{width:230px;background:#0b1019;border-right:1px solid var(--border);padding:22px 14px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{font-size:20px;font-weight:800}.brand span{color:var(--accent)}
+.sub{font-size:11px;color:var(--muted);margin:4px 0 22px}
+.nav a{display:block;padding:9px 12px;border-radius:8px;color:#aeb9ca;margin:3px 0;font-size:13px}
+.nav a:hover,.nav a.active{background:#151e2c;color:#fff;text-decoration:none}
+.nav a.active{border-left:3px solid var(--accent)}
+.main{flex:1;padding:26px;min-width:0;max-width:1700px}
+.tab{display:none}.tab.active{display:block}
+.header{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:18px}
+h1{font-size:24px;margin:0 0 6px;word-break:break-all}h2{font-size:16px;margin:0 0 12px}h3{font-size:13px;margin:14px 0 8px;color:#c9d6ea}
+.muted{color:var(--muted)}.small{font-size:11px}
+.badge{display:inline-flex;align-items:center;border:1px solid var(--border);border-radius:999px;padding:4px 10px;font-size:11px;font-weight:700;margin:2px 3px 2px 0}
+.badge.LOW,.badge.ok,.badge.good{color:var(--good)}.badge.MEDIUM,.badge.warn,.badge.suspicious{color:var(--warn)}
+.badge.HIGH{color:#ff9b5c}.badge.CRITICAL,.badge.bad,.badge.malicious{color:var(--crit)}
+.badge.info{color:var(--accent)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:16px}
+.card,.panel{background:rgba(16,22,33,.92);border:1px solid var(--border);border-radius:12px;padding:15px}
+.panel{margin-bottom:14px}
+.kpi .label{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--muted)}
+.kpi .value{font-size:17px;font-weight:800;margin-top:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.grid2>.panel,.grid3>.panel{margin-bottom:0}.row{margin-bottom:14px}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th,td{text-align:left;padding:8px;border-bottom:1px solid #202a39;vertical-align:top;word-break:break-word}
+th{font-size:10px;text-transform:uppercase;color:var(--muted);letter-spacing:.6px}
+code{font-family:Consolas,Monaco,monospace;color:#cfe0ff;word-break:break-all}
+pre{white-space:pre-wrap;word-break:break-word;background:#0a0f17;border:1px solid var(--border);padding:12px;border-radius:9px;font-size:11px;color:#c7d2e5;max-height:480px;overflow:auto}
+details{border:1px solid var(--border);border-radius:9px;margin:8px 0;background:#0d131d}
+summary{cursor:pointer;padding:10px 12px;font-size:12px;font-weight:700}details>div{padding:0 12px 12px}
+.search{width:100%;background:#0a0f17;border:1px solid var(--border);border-radius:8px;padding:9px;color:#fff;outline:none;margin-bottom:10px}
+.btn{background:#182235;border:1px solid #2b3a54;color:#dce8ff;padding:5px 9px;border-radius:7px;cursor:pointer;font-size:11px}
+.btn:hover{background:#22304a}
+.callout{border-left:3px solid var(--accent);padding:10px 13px;background:#0c1420;border-radius:7px;font-size:12px;margin:8px 0}
+.callout.warn{border-color:var(--warn)}.callout.bad{border-color:var(--crit)}
+.bar{height:8px;background:#202a3a;border-radius:99px;overflow:hidden}.bar>span{display:block;height:100%;border-radius:99px}
+.barrow{display:grid;grid-template-columns:130px 1fr 54px;gap:10px;align-items:center;margin:7px 0;font-size:12px}
+.big{font-size:38px;font-weight:900;line-height:1}
+.scroll{overflow-x:auto}
+.footer{color:#68758a;font-size:10px;margin-top:28px;padding:16px 0;border-top:1px solid var(--border)}
+.tactic{margin:10px 0 4px;font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--accent)}
+ul.clean{margin:6px 0;padding-left:18px}ul.clean li{margin:3px 0;font-size:12px}
+@media(max-width:1100px){.grid2,.grid3{grid-template-columns:1fr}}
+@media(max-width:800px){.sidebar{display:none}.main{padding:14px}}
+@media print{.sidebar{display:none}.tab{display:block!important}body{background:#fff;color:#000}}
+</style></head>
+<body><div class="app"><aside class="sidebar"><div class="brand">MAL<span> v4.0</span></div>
+<div class="sub">Defensive malware analysis &amp; threat intelligence</div><nav class="nav"><a href="#overview" data-tab="overview">Overview</a><a href="#intel" data-tab="intel">Threat Intel</a><a href="#static" data-tab="static">Static Analysis</a><a href="#caps" data-tab="caps">Capabilities &amp; ATT&amp;CK</a><a href="#iocs" data-tab="iocs">IOCs</a><a href="#decode" data-tab="decode">Deobfuscation</a><a href="#graph" data-tab="graph">Graph</a><a href="#yara" data-tab="yara">YARA</a><a href="#raw" data-tab="raw">Raw Data</a></nav>
+<div class="small muted" style="margin-top:26px">Mode<br><strong>STATIC / SAFE</strong><br><br>Sample execution<br><strong>DISABLED</strong><br><br>Sample upload<br><strong>NEVER</strong></div></aside>
+<main class="main"><section class="tab" id="tab-overview">
+<header class="header"><div><h1>app-release.apk</h1>
+<div class="muted small">Android package (APK) &middot; analysed 2026-10-26T05:56:00+00:00 &middot; MAL v4.0</div></div>
+<div><span class="badge LOW">LOW - 0/100</span> <button class="btn" data-copy="1836955b340cee9158e85c9a4f9997db5c6aed31e674c2277bd39f8b1fbc5f2a">Copy</button></div></header>
+<div class="kpis"><div class="card kpi"><div class="label">Type</div><div class="value" title="Android package (APK)">Android package (APK)</div></div><div class="card kpi"><div class="label">Size</div><div class="value" title="1.70 MB">1.70 MB</div></div><div class="card kpi"><div class="label">Entropy</div><div class="value" title="7.967">7.967</div></div><div class="card kpi"><div class="label">Risk</div><div class="value" title="LOW">LOW</div></div><div class="card kpi"><div class="label">Capabilities</div><div class="value" title="0">0</div></div><div class="card kpi"><div class="label">Findings</div><div class="value" title="0">0</div></div><div class="card kpi"><div class="label">ATT&amp;CK</div><div class="value" title="6">6</div></div><div class="card kpi"><div class="label">YARA</div><div class="value" title="0">0</div></div><div class="card kpi"><div class="label">Intel</div><div class="value" title="NO DETECTIONS">NO DETECTIONS</div></div></div>
+<div class="grid2 row">
+ <div class="panel "><h2>Risk</h2><div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap"><svg viewBox="0 0 200 120" width="220" role="img" aria-label="risk gauge"><path d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke="#202a3a" stroke-width="16" stroke-linecap="round"/><path d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke="#35d07f" stroke-width="16" stroke-linecap="round" stroke-dasharray="0.0 251.3"/><text x="100" y="92" text-anchor="middle" fill="#e8edf7" font-size="34" font-weight="800">0</text><text x="100" y="112" text-anchor="middle" fill="#35d07f" font-size="12" font-weight="700">LOW</text></svg><div style="flex:1;min-width:220px"><strong>LOW</strong> risk (0/100), confidence <strong>LOW</strong>. Threat intel verdict: <strong>no detections</strong>. Scores reflect observed indicators, not proof of execution.</div></div></div>
+ <div class="panel "><h2>Evidence by category</h2><div class="muted small">No scored evidence.</div></div>
+</div>
+<div class="grid2 row">
+ <div class="panel "><h2>Recommended next steps</h2><ul class='clean'><li>Add the SHA-256 (and imphash if present) to EDR block/alert lists; the generated YARA rule is a starting point and must be tested.</li></ul></div>
+ <div class="panel "><h2>Sample profile</h2><table><tbody><tr><th style='width:34%'><span class="muted">MD5</span></th><td><code>7a79def49463e594f38d7cb9683ae8c1</code></td></tr><tr><th style='width:34%'><span class="muted">SHA-1</span></th><td><code>a4b3328a54dcd1876930164c5ccc7d0e2a7a175f</code></td></tr><tr><th style='width:34%'><span class="muted">SHA-256</span></th><td><code>1836955b340cee9158e85c9a4f9997db5c6aed31e674c2277bd39f8b1fbc5f2a</code></td></tr><tr><th style='width:34%'><span class="muted">SHA3-256</span></th><td><code>9dc2ac9df47e66c8466c7df88d384bc4be11e0212f6592315b36dd21c71b10e8</code></td></tr><tr><th style='width:34%'><span class="muted">ssdeep</span></th><td><code>49152:z9xO8sbv4L/xvJYwwfGCQtYfQCwnmZ+7M1kpVqVgAQ:z/Or4L/xhXcGCQq4QcnPkgx</code></td></tr><tr><th style='width:34%'><span class="muted">TLSH</span></th><td><code>T12C852393D360693DEE7B90701F8E53226272AD26C709E74FAAD9369C66371C91F003E5</code></td></tr><tr><th style='width:34%'><span class="muted">Kind</span></th><td>apk</td></tr><tr><th style='width:34%'><span class="muted">Modified</span></th><td>2026-10-26T11:24:04</td></tr></tbody></table></div>
+</div>
+<div class="panel "><h2>Threat-intel providers</h2><span class='badge info'>VirusTotal: ok</span><span class='badge info'>MalwareBazaar: not_found</span><span class='badge info'>URLhaus: not_found</span><span class='badge info'>ThreatFox: not_found</span><span class='badge info'>AlienVault OTX: not_found</span><span class='badge info'>Hybrid Analysis: not_found</span><span class='badge info'>AbuseIPDB: skipped</span></div>
+<div class="panel "><h2>Entropy map</h2><svg viewBox="0 0 640 90" width="100%" height="90" preserveAspectRatio="none" role="img" aria-label="entropy map"><line x1="0" x2="640" y1="13.8" y2="13.8" stroke="#ff6577" stroke-dasharray="4 4" stroke-width="1"/><polyline fill="none" stroke="#63a4ff" stroke-width="1.6" points="0.0,6.5 6.7,6.5 13.5,6.7 20.2,7.3 26.9,6.7 33.7,6.8 40.4,6.8 47.2,6.7 53.9,6.6 60.6,6.9 67.4,6.6 74.1,7.2 80.8,9.1 87.6,8.1 94.3,6.3 101.1,6.3 107.8,6.3 114.5,6.2 121.3,6.2 128.0,6.2 134.7,6.3 141.5,6.2 148.2,6.3 154.9,6.2 161.7,6.2 168.4,6.3 175.2,6.3 181.9,6.3 188.6,6.4 195.4,6.3 202.1,6.4 208.8,6.3 215.6,6.2 222.3,6.3 229.1,6.4 235.8,6.3 242.5,6.2 249.3,6.2 256.0,6.3 262.7,6.2 269.5,6.2 276.2,6.4 282.9,6.2 289.7,6.3 296.4,6.2 303.2,6.1 309.9,6.2 316.6,6.1 323.4,6.2 330.1,6.3 336.8,6.2 343.6,6.2 350.3,6.1 357.1,6.1 363.8,6.2 370.5,6.2 377.3,6.2 384.0,6.2 390.7,6.1 397.5,6.2 404.2,6.1 410.9,6.1 417.7,6.1 424.4,6.2 431.2,6.2 437.9,6.2 444.6,6.1 451.4,6.1 458.1,6.1 464.8,6.1 471.6,6.2 478.3,6.1 485.1,6.2 491.8,6.1 498.5,6.1 505.3,6.1 512.0,6.3 518.7,6.2 525.5,6.2 532.2,6.1 538.9,6.1 545.7,6.4 552.4,6.6 559.2,7.1 565.9,7.1 572.6,7.3 579.4,6.2 586.1,6.8 592.8,7.8 599.6,6.9 606.3,7.2 613.1,12.5 619.8,25.3 626.5,61.2 633.3,34.6 640.0,17.6"/></svg><div class="muted small">Entropy across the file (0-8). Dashed line = 7.2 (typical packed / encrypted data).</div></div>
+<div class="panel "><h2>Top risk contributors</h2><div class="muted small">No data.</div></div>
+</section><section class="tab" id="tab-intel"><div class="panel "><h2>Provider status</h2><div class="scroll"><table><thead><tr><th>Provider</th><th>Status</th><th>Note</th></tr></thead><tbody><tr><td>VirusTotal</td><td><span class="badge good">ok</span></td><td></td></tr><tr><td>MalwareBazaar</td><td><span class="badge info">not_found</span></td><td></td></tr><tr><td>URLhaus</td><td><span class="badge info">not_found</span></td><td></td></tr><tr><td>ThreatFox</td><td><span class="badge info">not_found</span></td><td></td></tr><tr><td>AlienVault OTX</td><td><span class="badge info">not_found</span></td><td></td></tr><tr><td>Hybrid Analysis</td><td><span class="badge info">not_found</span></td><td></td></tr><tr><td>AbuseIPDB</td><td><span class="badge warn">skipped</span></td><td>Network-only provider; use --enrich to query IPs.</td></tr></tbody></table></div><div class="callout">Verdict: <strong>no detections</strong> | first seen: 2026-10-01 06:43:27 UTC<br><span class="muted">File hashes AND the listed domains/IPs extracted from the sample were sent to the selected providers.</span></div></div><div class="grid3 row">
+<div class="card"><div class="muted small">DETECTIONS</div><div class="big">0/67</div></div>
+<div class="card"><div class="muted small">MALICIOUS / SUSPICIOUS</div><div class="big">0 / 0</div></div>
+<div class="card"><div class="muted small">COMMUNITY</div><div>reputation <strong>0</strong><br>votes: 0 malicious / 0 harmless</div></div></div><div class="panel "><h2>VirusTotal file intelligence</h2><table><tbody><tr><th style='width:34%'><span class="muted">Suggested threat label</span></th><td>-</td></tr><tr><th style='width:34%'><span class="muted">Threat categories</span></th><td><span class="muted small">none</span></td></tr><tr><th style='width:34%'><span class="muted">Family names</span></th><td><span class="muted small">none</span></td></tr><tr><th style='width:34%'><span class="muted">Known names</span></th><td><ul class='clean'><li>app-release.apk</li></ul></td></tr><tr><th style='width:34%'><span class="muted">Meaningful name</span></th><td>app-release.apk</td></tr><tr><th style='width:34%'><span class="muted">File type</span></th><td>Android (android)</td></tr><tr><th style='width:34%'><span class="muted">First submitted</span></th><td>2026-10-01 06:43:27 UTC</td></tr><tr><th style='width:34%'><span class="muted">Last submitted</span></th><td>2026-10-01 06:43:27 UTC</td></tr><tr><th style='width:34%'><span class="muted">Last analysed</span></th><td>2026-10-01 06:43:27 UTC</td></tr><tr><th style='width:34%'><span class="muted">Times submitted</span></th><td>1 (1 sources)</td></tr><tr><th style='width:34%'><span class="muted">Tags</span></th><td><span class="badge info">android</span><span class="badge info">apk</span><span class="badge info">obfuscated</span><span class="badge info">checks-gps</span><span class="badge info">telephony</span><span class="badge info">reflection</span></td></tr><tr><th style='width:34%'><span class="muted">Capabilities</span></th><td><span class="muted small">none</span></td></tr><tr><th style='width:34%'><span class="muted">Packers</span></th><td><span class="muted small">none</span></td></tr><tr><th style='width:34%'><span class="muted">TrID</span></th><td><ul class='clean'><li>Android Package (60.6%)</li><li>Java Archive (30.3%)</li><li>ZIP compressed archive (8.9%)</li></ul></td></tr></tbody></table></div><div class="panel "><h2>Sandbox verdicts</h2><div class="scroll"><table><thead><tr><th>Sandbox</th><th>Verdict</th><th>Confidence</th><th>Classification</th><th>Names</th></tr></thead><tbody><tr><td>Zenbox android</td><td><span class="badge info">harmless</span></td><td>93</td><td>CLEAN</td><td></td></tr></tbody></table></div></div><div class="panel "><h2>Flagging engines (0)</h2><input class="search" id="vtq" oninput="filt('vtq','vtt')" placeholder="Filter engines..."><div class="muted small">No engine flagged this hash.</div></div><div class="panel "><h2>Sandbox behaviour (observed by VirusTotal sandboxes, NOT by MAL)</h2><details><summary>DNS lookups (4)</summary><div><ul class='clean'><li>chatgpt.com -&gt; 172.64.155.209, 104.18.32.47</li><li>downloads.blissroms.org -&gt; 104.21.64.137, 172.67.151.52</li><li>infinitedata-pa.googleapis.com -&gt; 172.217.118.4, 172.217.114.4, 172.217.112.4, 172.217.113.4, 172.217.117.4, 172.2...</li><li>www.googleapis.com -&gt; 172.217.114.4, 172.217.112.4, 172.217.113.4, 172.217.119.4, 172.217.117.4, 172.2...</li></ul></div></details><details><summary>IP traffic (8)</summary><div><ul class='clean'><li>172.217.214.94:443 /TCP</li><li>192.178.129.138:443 /TCP</li><li>74.125.126.95:443 /TCP</li><li>104.21.64.137:443 /TCP</li><li>74.125.202.106:443 /TCP</li><li>74.125.202.100:443 /TCP</li><li>64.233.181.95:443 /TCP</li><li>172.64.155.209:443 /TCP</li></ul></div></details><h3>Behaviour tags</h3><span class="badge warn">OBFUSCATED</span><span class="badge warn">CHECKS_GPS</span><span class="badge warn">TELEPHONY</span><span class="badge warn">REFLECTION</span><h3>MITRE ATT&amp;CK observed</h3><div class="scroll"><table><thead><tr><th>ID</th><th>Severity</th><th>Signature</th></tr></thead><tbody><tr><td><code>T1406</code></td><td>IMPACT_SEVERITY_INFO</td><td>Obfuscates method names</td></tr><tr><td><code>T1421</code></td><td>IMPACT_SEVERITY_INFO</td><td>Checks an internet connection is available</td></tr><tr><td><code>T1430</code></td><td>IMPACT_SEVERITY_INFO</td><td>Queries the phones location (GPS)</td></tr><tr><td><code>T1430</code></td><td>IMPACT_SEVERITY_INFO</td><td>Has permission to query the current location</td></tr><tr><td><code>T1426</code></td><td>IMPACT_SEVERITY_INFO</td><td>Queries the unqiue device ID (IMEI, MEID or ESN)</td></tr><tr><td><code>T1573</code></td><td>IMPACT_SEVERITY_INFO</td><td>Uses HTTPS</td></tr><tr><td><code>T1071</code></td><td>IMPACT_SEVERITY_INFO</td><td>Uses HTTPS</td></tr></tbody></table></div></div><div class="panel "><h2>Relationships (from VT sandbox runs)</h2><details open><summary>Contacted domains (4)</summary><div><div class="scroll"><table><thead><tr><th>Indicator</th><th>VT detections</th><th>Reputation</th><th>Country</th><th>Owner</th></tr></thead><tbody><tr><td><code class="ioc" data-raw="chatgpt.com" data-def="chatgpt[.]com">chatgpt[.]com</code></td><td>0</td><td>8</td><td></td><td></td></tr><tr><td><code class="ioc" data-raw="downloads.blissroms.org" data-def="downloads[.]blissroms[.]org">downloads[.]blissroms[.]org</code></td><td>0</td><td>0</td><td></td><td></td></tr><tr><td><code class="ioc" data-raw="infinitedata-pa.googleapis.com" data-def="infinitedata-pa[.]googleapis[.]com">infinitedata-pa[.]googleapis[.]com</code></td><td>0</td><td>-1</td><td></td><td></td></tr><tr><td><code class="ioc" data-raw="www.googleapis.com" data-def="www[.]googleapis[.]com">www[.]googleapis[.]com</code></td><td>0</td><td>1</td><td></td><td></td></tr></tbody></table></div></div></details><details open><summary>Contacted IPs (18)</summary><div><div class="scroll"><table><thead><tr><th>Indicator</th><th>VT detections</th><th>Reputation</th><th>Country</th><th>Owner</th></tr></thead><tbody><tr><td><code class="ioc" data-raw="104.18.32.47" data-def="104[.]18[.]32[.]47">104[.]18[.]32[.]47</code></td><td>0</td><td>-4</td><td></td><td>Cloudflare, Inc.</td></tr><tr><td><code class="ioc" data-raw="104.21.64.137" data-def="104[.]21[.]64[.]137">104[.]21[.]64[.]137</code></td><td>0</td><td>-8</td><td></td><td>Cloudflare, Inc.</td></tr><tr><td><code class="ioc" data-raw="172.217.112.4" data-def="172[.]217[.]112[.]4">172[.]217[.]112[.]4</code></td><td>0</td><td>0</td><td>US</td><td>Google LLC</td></tr><tr><td><code class="ioc" data-raw="172.217.113.4" data-def="172[.]217[.]113[.]4">172[.]217[.]113[.]4</code></td><td>0</td><td>0</td><td>US</td><td>Google LLC</td></tr><tr><td><code class="ioc" data-raw="172.217.114.4" data-def="172[.]217[.]114[.]4">172[.]217[.]114[.]4</code></td><td>0</td><td>0</td><td>US</td><td>Google LLC</td></tr><tr><td><code class="ioc" data-raw="172.217.115.4" data-def="172[.]217[.]115[.]4">172[.]217[.]115[.]4</code></td><td>0</td><td>0</td><td>US</td><td>Google LLC</td></tr><tr><td><code class="ioc" data-raw="172.217.116.4" data-def="172[.]217[.]116[.]4">172[.]217[.]116[.]4</code></td><td>0</td><td>0</td><td>US</td><td>Google LLC</td></tr><tr><td><code class="ioc" data-raw="172.217.117.4" data-def="172[.]217[.]117[.]4">172[.]217[.]117[.]4</code></td><td>0</td><td>0</td><td>US</td><td>Google LLC</td></tr><tr><td><code class="ioc" data-raw="172.217.118.4" data-def="172[.]217[.]118[.]4">172[.]217[.]118[.]4</code></td><td>0</td><td>0</td><td>US</td><td>Google LLC</td></tr><tr><td><code class="ioc" data-raw="172.217.119.4" data-def="172[.]217[.]119[.]4">172[.]217[.]119[.]4</code></td><td>0</td><td>0</td><td>US</td><td>Google LLC</td></tr><tr><td><code class="ioc" data-raw="172.217.214.94" data-def="172[.]217[.]214[.]94">172[.]217[.]214[.]94</code></td><td>0</td><td>-42</td><td>US</td><td>Google LLC</td></tr><tr><td><code class="ioc" data-raw="172.64.155.209" data-def="172[.]64[.]155[.]209">172[.]64[.]155[.]209</code></td><td>0</td><td>0</td><td></td><td>Cloudflare, Inc.</td></tr><tr><td><code class="ioc" data-raw="172.67.151.52" data-def="172[.]67[.]151[.]52">172[.]67[.]151[.]52</code></td><td>0</td><td>0</td><td></td><td>Cloudflare, Inc.</td></tr><tr><td><code class="ioc" data-raw="192.178.129.138" data-def="192[.]178[.]129[.]138">192[.]178[.]129[.]138</code></td><td>0</td><td>0</td><td>US</td><td>Google LLC</td></tr><tr><td><code class="ioc" data-raw="64.233.181.95" data-def="64[.]233[.]181[.]95">64[.]233[.]181[.]95</code></td><td>0</td><td>0</td><td>US</td><td>Google LLC</td></tr><tr><td><code class="ioc" data-raw="74.125.126.95" data-def="74[.]125[.]126[.]95">74[.]125[.]126[.]95</code></td><td>0</td><td>-44</td><td>US</td><td>Google LLC</td></tr><tr><td><code class="ioc" data-raw="74.125.202.100" data-def="74[.]125[.]202[.]100">74[.]125[.]202[.]100</code></td><td>0</td><td>0</td><td>US</td><td>Google LLC</td></tr><tr><td><code class="ioc" data-raw="74.125.202.106" data-def="74[.]125[.]202[.]106">74[.]125[.]202[.]106</code></td><td>0</td><td>1</td><td>US</td><td>Google LLC</td></tr></tbody></table></div></div></details><details><summary>Dropped files (0)</summary><div><div class="muted small">None (ok).</div></div></details></div><div class="callout">Report limit: standard depth (~5 API calls). <a href="https://www.virustotal.com/gui/file/1836955b340cee9158e85c9a4f9997db5c6aed31e674c2277bd39f8b1fbc5f2a" target="_blank" rel="noopener noreferrer">Open on VirusTotal</a></div></section><section class="tab" id="tab-static"><div class="panel "><h2>Structural findings</h2><div class="muted small">No structural anomalies.</div></div><div class="panel "><h2>Archive listing (metadata only; nothing extracted)</h2><div class="scroll"><table><thead><tr><th>Name</th><th>Size</th><th>Compressed</th><th>Encrypted</th></tr></thead><tbody><tr><td>META-INF/com/android/build/gradle/app-metadata.properties</td><td>56</td><td>52</td><td>False</td></tr><tr><td>META-INF/version-control-info.textproto</td><td>46</td><td>48</td><td>False</td></tr><tr><td>assets/dexopt/baseline.prof</td><td>510</td><td>510</td><td>False</td></tr><tr><td>assets/dexopt/baseline.profm</td><td>97</td><td>97</td><td>False</td></tr><tr><td>classes.dex</td><td>4702068</td><td>1589620</td><td>False</td></tr><tr><td>classes2.dex</td><td>2052</td><td>826</td><td>False</td></tr><tr><td>assets/server.json</td><td>149</td><td>133</td><td>False</td></tr><tr><td>DebugProbesKt.bin</td><td>1738</td><td>782</td><td>False</td></tr><tr><td>META-INF/androidx.activity_activity-ktx.version</td><td>7</td><td>7</td><td>False</td></tr><tr><td>META-INF/androidx.activity_activity.version</td><td>7</td><td>7</td><td>False</td></tr><tr><td>META-INF/androidx.annotation_annotation-experimental.version</td><td>6</td><td>6</td><td>False</td></tr><tr><td>META-INF/androidx.arch.core_core-runtime.version</td><td>67</td><td>61</td><td>False</td></tr><tr><td>META-INF/androidx.core_core-ktx.version</td><td>7</td><td>7</td><td>False</td></tr><tr><td>META-INF/androidx.core_core-viewtree.version</td><td>6</td><td>6</td><td>False</td></tr><tr><td>META-INF/androidx.core_core.version</td><td>7</td><td>7</td><td>False</td></tr><tr><td>META-INF/androidx.interpolator_interpolator.version</td><td>6</td><td>6</td><td>False</td></tr><tr><td>META-INF/androidx.lifecycle_lifecycle-livedata-core.version</td><td>78</td><td>67</td><td>False</td></tr><tr><td>META-INF/androidx.lifecycle_lifecycle-runtime-ktx.version</td><td>76</td><td>65</td><td>False</td></tr><tr><td>META-INF/androidx.lifecycle_lifecycle-runtime.version</td><td>72</td><td>61</td><td>False</td></tr><tr><td>META-INF/androidx.lifecycle_lifecycle-viewmodel-ktx.version</td><td>78</td><td>67</td><td>False</td></tr><tr><td>META-INF/androidx.lifecycle_lifecycle-viewmodel-savedstate.version</td><td>85</td><td>74</td><td>False</td></tr><tr><td>META-INF/androidx.lifecycle_lifecycle-viewmodel.version</td><td>74</td><td>63</td><td>False</td></tr><tr><td>META-INF/androidx.profileinstaller_profileinstaller.version</td><td>6</td><td>6</td><td>False</td></tr><tr><td>META-INF/androidx.savedstate_savedstate-ktx.version</td><td>6</td><td>6</td><td>False</td></tr><tr><td>META-INF/androidx.savedstate_savedstate.version</td><td>6</td><td>6</td><td>False</td></tr><tr><td>META-INF/androidx.startup_startup-runtime.version</td><td>6</td><td>6</td><td>False</td></tr><tr><td>META-INF/androidx.tracing_tracing.version</td><td>6</td><td>6</td><td>False</td></tr><tr><td>META-INF/androidx.versionedparcelable_versionedparcelable.version</td><td>6</td><td>6</td><td>False</td></tr><tr><td>META-INF/kotlinx_coroutines_android.version</td><td>5</td><td>5</td><td>False</td></tr><tr><td>META-INF/kotlinx_coroutines_core.version</td><td>5</td><td>5</td><td>False</td></tr><tr><td>META-INF/services/kotlinx.coroutines.CoroutineExceptionHandler</td><td>54</td><td>50</td><td>False</td></tr><tr><td>META-INF/services/kotlinx.coroutines.internal.MainDispatcherFactory</td><td>52</td><td>49</td><td>False</td></tr><tr><td>kotlin-tooling-metadata.json</td><td>626</td><td>284</td><td>False</td></tr><tr><td>kotlin/annotation/annotation.kotlin_builtins</td><td>928</td><td>561</td><td>False</td></tr><tr><td>kotlin/collections/collections.kotlin_builtins</td><td>3685</td><td>1521</td><td>False</td></tr><tr><td>kotlin/coroutines/coroutines.kotlin_builtins</td><td>200</td><td>157</td><td>False</td></tr><tr><td>kotlin/internal/internal.kotlin_builtins</td><td>646</td><td>394</td><td>False</td></tr><tr><td>kotlin/kotlin.kotlin_builtins</td><td>18661</td><td>5257</td><td>False</td></tr><tr><td>kotlin/ranges/ranges.kotlin_builtins</td><td>3399</td><td>1292</td><td>False</td></tr><tr><td>kotlin/reflect/reflect.kotlin_builtins</td><td>2426</td><td>1286</td><td>False</td></tr><tr><td>AndroidManifest.xml</td><td>5872</td><td>1675</td><td>False</td></tr><tr><td>res/-6.webp</td><td>10402</td><td>10402</td><td>False</td></tr><tr><td>res/0K.xml</td><td>548</td><td>241</td><td>False</td></tr><tr><td>res/0Z.png</td><td>1171</td><td>1171</td><td>False</td></tr><tr><td>res/0w.xml</td><td>5696</td><td>979</td><td>False</td></tr><tr><td>res/13.webp</td><td>2326</td><td>2326</td><td>False</td></tr><tr><td>res/2K.9.png</td><td>225</td><td>225</td><td>False</td></tr><tr><td>res/4z.xml</td><td>876</td><td>415</td><td>False</td></tr><tr><td>res/5P.png</td><td>628</td><td>628</td><td>False</td></tr><tr><td>res/5c.png</td><td>138</td><td>138</td><td>False</td></tr><tr><td>res/5c.webp</td><td>7746</td><td>7746</td><td>False</td></tr><tr><td>res/5v.png</td><td>201</td><td>201</td><td>False</td></tr><tr><td>res/6P.png</td><td>199</td><td>199</td><td>False</td></tr><tr><td>res/6d.png</td><td>452</td><td>452</td><td>False</td></tr><tr><td>res/71.png</td><td>290</td><td>290</td><td>False</td></tr><tr><td>res/7V.png</td><td>254</td><td>254</td><td>False</td></tr><tr><td>res/7m.png</td><td>884</td><td>884</td><td>False</td></tr><tr><td>res/8t.xml</td><td>1356</td><td>663</td><td>False</td></tr><tr><td>res/9Q.webp</td><td>3248</td><td>3248</td><td>False</td></tr><tr><td>res/9m.xml</td><td>304</td><td>172</td><td>False</td></tr><tr><td>res/Ac.xml</td><td>772</td><td>421</td><td>False</td></tr><tr><td>res/Ag.png</td><td>465</td><td>465</td><td>False</td></tr><tr><td>res/BT.png</td><td>264</td><td>264</td><td>False</td></tr><tr><td>res/BW.xml</td><td>548</td><td>241</td><td>False</td></tr><tr><td>res/C_.9.png</td><td>215</td><td>215</td><td>False</td></tr><tr><td>res/Ck.png</td><td>823</td><td>823</td><td>False</td></tr><tr><td>res/D-.xml</td><td>1528</td><td>734</td><td>False</td></tr><tr><td>res/Ec.png</td><td>206</td><td>206</td><td>False</td></tr><tr><td>res/Ff.png</td><td>317</td><td>317</td><td>False</td></tr><tr><td>res/G2.xml</td><td>736</td><td>401</td><td>False</td></tr><tr><td>res/GY.png</td><td>290</td><td>290</td><td>False</td></tr><tr><td>res/LO.png</td><td>264</td><td>264</td><td>False</td></tr><tr><td>res/MD.png</td><td>1171</td><td>1171</td><td>False</td></tr><tr><td>res/MO.webp</td><td>1662</td><td>1662</td><td>False</td></tr><tr><td>res/Ma.9.png</td><td>247</td><td>247</td><td>False</td></tr><tr><td>res/Nt.webp</td><td>1470</td><td>1470</td><td>False</td></tr><tr><td>res/OM.png</td><td>384</td><td>384</td><td>False</td></tr><tr><td>res/OX.png</td><td>375</td><td>375</td><td>False</td></tr><tr><td>res/OX1.png</td><td>465</td><td>465</td><td>False</td></tr><tr><td>res/Q-.png</td><td>270</td><td>270</td><td>False</td></tr><tr><td>res/S8.xml</td><td>1052</td><td>486</td><td>False</td></tr><tr><td>res/Sn.webp</td><td>3574</td><td>3574</td><td>False</td></tr><tr><td>res/Tl.xml</td><td>1320</td><td>644</td><td>False</td></tr><tr><td>res/Tr.png</td><td>254</td><td>254</td><td>False</td></tr><tr><td>res/U-.9.png</td><td>223</td><td>223</td><td>False</td></tr><tr><td>res/VW.png</td><td>452</td><td>452</td><td>False</td></tr><tr><td>res/W5.png</td><td>472</td><td>472</td><td>False</td></tr><tr><td>res/Ws.xml</td><td>1180</td><td>467</td><td>False</td></tr><tr><td>res/Y3.png</td><td>384</td><td>384</td><td>False</td></tr><tr><td>res/Y9.png</td><td>623</td><td>623</td><td>False</td></tr><tr><td>res/YD.png</td><td>201</td><td>201</td><td>False</td></tr><tr><td>res/_H.xml</td><td>1492</td><td>712</td><td>False</td></tr><tr><td>res/_y.xml</td><td>612</td><td>309</td><td>False</td></tr><tr><td>res/a0.xml</td><td>1228</td><td>535</td><td>False</td></tr><tr><td>res/aR.png</td><td>623</td><td>623</td><td>False</td></tr><tr><td>res/aU.png</td><td>628</td><td>628</td><td>False</td></tr><tr><td>res/bi.png</td><td>317</td><td>317</td><td>False</td></tr><tr><td>res/c6.xml</td><td>372</td><td>184</td><td>False</td></tr><tr><td>res/cV.xml</td><td>440</td><td>261</td><td>False</td></tr><tr><td>res/cr.xml</td><td>364</td><td>201</td><td>False</td></tr><tr><td>res/d2.webp</td><td>1152</td><td>1152</td><td>False</td></tr><tr><td>res/df.xml</td><td>532</td><td>252</td><td>False</td></tr><tr><td>res/fq.webp</td><td>3116</td><td>3116</td><td>False</td></tr><tr><td>res/gK.9.png</td><td>215</td><td>215</td><td>False</td></tr><tr><td>res/gr.png</td><td>472</td><td>472</td><td>False</td></tr><tr><td>res/iE.webp</td><td>5288</td><td>5288</td><td>False</td></tr><tr><td>res/iQ.xml</td><td>988</td><td>418</td><td>False</td></tr><tr><td>res/j_.webp</td><td>7236</td><td>7236</td><td>False</td></tr><tr><td>res/je.9.png</td><td>212</td><td>212</td><td>False</td></tr><tr><td>res/kS.png</td><td>375</td><td>375</td><td>False</td></tr><tr><td>res/lR.xml</td><td>440</td><td>260</td><td>False</td></tr><tr><td>res/nz.xml</td><td>532</td><td>252</td><td>False</td></tr><tr><td>res/o_.9.png</td><td>252</td><td>252</td><td>False</td></tr><tr><td>res/p8.png</td><td>823</td><td>823</td><td>False</td></tr><tr><td>res/pY.png</td><td>107</td><td>107</td><td>False</td></tr><tr><td>res/pu.png</td><td>909</td><td>909</td><td>False</td></tr><tr><td>res/qs.webp</td><td>2252</td><td>2252</td><td>False</td></tr><tr><td>res/s4.png</td><td>98</td><td>98</td><td>False</td></tr><tr><td>res/sA.9.png</td><td>212</td><td>212</td><td>False</td></tr><tr><td>res/sK.webp</td><td>5432</td><td>5432</td><td>False</td></tr><tr><td>res/td.png</td><td>199</td><td>199</td><td>False</td></tr><tr><td>res/u5.webp</td><td>4474</td><td>4474</td><td>False</td></tr><tr><td>res/v9.xml</td><td>468</td><td>237</td><td>False</td></tr><tr><td>res/vL.9.png</td><td>223</td><td>223</td><td>False</td></tr><tr><td>res/w7.png</td><td>270</td><td>270</td><td>False</td></tr><tr><td>res/wN.9.png</td><td>225</td><td>225</td><td>False</td></tr><tr><td>res/xN.xml</td><td>2456</td><td>785</td><td>False</td></tr><tr><td>res/xa.9.png</td><td>221</td><td>221</td><td>False</td></tr><tr><td>res/yw.webp</td><td>1986</td><td>1986</td><td>False</td></tr><tr><td>res/z-.9.png</td><td>221</td><td>221</td><td>False</td></tr><tr><td>res/zL.png</td><td>206</td><td>206</td><td>False</td></tr><tr><td>res/zz.png</td><td>884</td><td>884</td><td>False</td></tr><tr><td>resources.arsc</td><td>57604</td><td>57604</td><td>False</td></tr><tr><td>META-INF/CERT.SF</td><td>12478</td><td>5839</td><td>False</td></tr><tr><td>META-INF/CERT.RSA</td><td>1317</td><td>1055</td><td>False</td></tr><tr><td>META-INF/MANIFEST.MF</td><td>12404</td><td>4944</td><td>False</td></tr></tbody></table></div></div></section><section class="tab" id="tab-caps"><div class="panel "><h2>Capability indicators (each scored once)</h2><div class="muted small">No capability indicators matched.</div></div><div class="panel "><h2>Correlated behaviour clusters</h2><div class="muted small">No clusters.</div></div><div class="panel "><h2>MITRE ATT&amp;CK mapping</h2><div class="tactic">Command and Control</div><div class="scroll"><table><thead><tr><th>Technique</th><th>Name</th><th>Evidence</th><th>Source</th></tr></thead><tbody><tr><td><code>T1071</code></td><td>Application Layer Protocol</td><td>Uses HTTPS</td><td>VirusTotal sandbox</td></tr></tbody></table></div><div class="tactic">Other</div><div class="scroll"><table><thead><tr><th>Technique</th><th>Name</th><th>Evidence</th><th>Source</th></tr></thead><tbody><tr><td><code>T1406</code></td><td>Obfuscates method names</td><td>Obfuscates method names</td><td>VirusTotal sandbox</td></tr><tr><td><code>T1421</code></td><td>Checks an internet connection is available</td><td>Checks an internet connection is available</td><td>VirusTotal sandbox</td></tr><tr><td><code>T1426</code></td><td>Queries the unqiue device ID (IMEI, MEID or ESN)</td><td>Queries the unqiue device ID (IMEI, MEID or ESN)</td><td>VirusTotal sandbox</td></tr><tr><td><code>T1430</code></td><td>Queries the phones location (GPS)</td><td>Queries the phones location (GPS); Has permission to query the current location</td><td>VirusTotal sandbox</td></tr><tr><td><code>T1573</code></td><td>Uses HTTPS</td><td>Uses HTTPS</td><td>VirusTotal sandbox</td></tr></tbody></table></div><div class="callout">Static technique mapping shows <em>capability</em>. Techniques tagged with a sandbox/OTX source were reported by third parties.</div></div></section><section class="tab" id="tab-iocs"><div class="panel "><h2>IOC explorer (network IOCs are defanged by default)</h2><button class="btn" onclick="toggleDefang(this)" style="margin-bottom:10px">Show raw (live) IOCs</button> <input class="search" id="iocq" oninput="filt('iocq','ioct')" placeholder="Search URLs, domains, IPs, paths, registry..."><div class="muted small">No IOCs extracted.</div></div></section><section class="tab" id="tab-decode"><div class="callout">All decoding is performed on bytes in memory. <strong>Nothing is executed or evaluated.</strong></div><div class="panel "><h2>Decoded layers</h2><div class="muted small">No encoded layers found.</div></div><div class="panel "><h2>Embedded / decoded executables</h2><div class="muted small">No embedded PE files found.</div></div><div class="panel "><h2>Single-byte XOR findings</h2><div class="muted small">None found.</div></div></section><section class="tab" id="tab-graph"><div class="panel "><h2>Relationship graph</h2><svg viewBox="0 0 980 560" width="100%" role="img" aria-label="relationship graph"><line x1="490" y1="280" x2="490" y2="65" stroke="#2b3a54" stroke-width="1"/><line x1="490" y1="280" x2="721" y2="115" stroke="#2b3a54" stroke-width="1"/><line x1="490" y1="280" x2="845" y2="243" stroke="#2b3a54" stroke-width="1"/><line x1="490" y1="280" x2="802" y2="387" stroke="#2b3a54" stroke-width="1"/><line x1="490" y1="280" x2="613" y2="482" stroke="#2b3a54" stroke-width="1"/><line x1="490" y1="280" x2="367" y2="482" stroke="#2b3a54" stroke-width="1"/><line x1="490" y1="280" x2="178" y2="388" stroke="#2b3a54" stroke-width="1"/><line x1="490" y1="280" x2="135" y2="243" stroke="#2b3a54" stroke-width="1"/><line x1="490" y1="280" x2="259" y2="115" stroke="#2b3a54" stroke-width="1"/><circle cx="490" cy="65" r="7" fill="#35d07f"/><text x="490" y="53" fill="#c7d2e5" font-size="11" text-anchor="middle">chatgpt[.]com</text><circle cx="721" cy="115" r="7" fill="#35d07f"/><text x="733" y="119" fill="#c7d2e5" font-size="11" text-anchor="start">downloads[.]blissroms[.]org</text><circle cx="845" cy="243" r="7" fill="#35d07f"/><text x="857" y="247" fill="#c7d2e5" font-size="11" text-anchor="start">infinitedata-pa[.]googleapis[.]com</text><circle cx="802" cy="387" r="7" fill="#35d07f"/><text x="814" y="391" fill="#c7d2e5" font-size="11" text-anchor="start">www[.]googleapis[.]com</text><circle cx="613" cy="482" r="7" fill="#5eead4"/><text x="625" y="486" fill="#c7d2e5" font-size="11" text-anchor="start">104[.]18[.]32[.]47</text><circle cx="367" cy="482" r="7" fill="#5eead4"/><text x="355" y="486" fill="#c7d2e5" font-size="11" text-anchor="end">104[.]21[.]64[.]137</text><circle cx="178" cy="388" r="7" fill="#5eead4"/><text x="166" y="392" fill="#c7d2e5" font-size="11" text-anchor="end">172[.]217[.]112[.]4</text><circle cx="135" cy="243" r="7" fill="#5eead4"/><text x="123" y="247" fill="#c7d2e5" font-size="11" text-anchor="end">172[.]217[.]113[.]4</text><circle cx="259" cy="115" r="7" fill="#5eead4"/><text x="247" y="119" fill="#c7d2e5" font-size="11" text-anchor="end">172[.]217[.]114[.]4</text><circle cx="490" cy="280" r="46" fill="#101621" stroke="#35d07f" stroke-width="3"/><text x="490" y="278" text-anchor="middle" fill="#e8edf7" font-size="12" font-weight="700">SAMPLE</text><text x="490" y="294" text-anchor="middle" fill="#35d07f" font-size="11">LOW</text><circle cx="20" cy="546" r="5" fill="#63a4ff"/><text x="30" y="550" fill="#8e9bb0" font-size="10">domain</text><circle cx="155" cy="546" r="5" fill="#f4c95d"/><text x="165" y="550" fill="#8e9bb0" font-size="10">ip</text><circle cx="290" cy="546" r="5" fill="#a78bfa"/><text x="300" y="550" fill="#8e9bb0" font-size="10">url</text><circle cx="425" cy="546" r="5" fill="#fb923c"/><text x="435" y="550" fill="#8e9bb0" font-size="10">embedded payload</text><circle cx="560" cy="546" r="5" fill="#35d07f"/><text x="570" y="550" fill="#8e9bb0" font-size="10">VT contacted domain</text><circle cx="695" cy="546" r="5" fill="#5eead4"/><text x="705" y="550" fill="#8e9bb0" font-size="10">VT contacted IP</text><circle cx="830" cy="546" r="5" fill="#ff6577"/><text x="840" y="550" fill="#8e9bb0" font-size="10">VT dropped file</text></svg></div></section><section class="tab" id="tab-yara"><div class="panel "><h2>YARA matches (2 rule file(s) loaded)</h2><div class="muted small">No rules matched.</div></div><div class="muted small">Run with <code>--formats yara</code> or <code>--formats all</code> to generate a rule from this sample.</div></section><section class="tab" id="tab-raw"><div class="panel "><h2>Extracted strings (500 of 7455 shown)</h2><pre>META-INF/com/android/build/gradle/app-metadata.propertiesK,(
+M-ILI,I
+Lq/JL
+META-INF/version-control-info.textprotoKO
+K-J,I
+assets/dexopt/baseline.prof
+/r|~w
+%fP`m
+assets/dexopt/baseline.profmprm
+I,.N-
+LH4+P!
+classes.dex,
+2ux S
+4!&lt;OM&gt;
+KB(Nm&gt;g
+e&lt;;Hu4!
+d0GHH
+H(OoN
+Q&lt;G$tc#
+l!!&quot;&amp;
+&amp;EBs~
+.+*FB
+&#x27;}4C\g
+P/K4\
+l4T}.
+}?I.&#x27;G
+F4|yS
+9-c!K
+Xxrz,
+h?;ca
+3E&lt;dN
+xx;[&lt;
+Y$1|S
+d5;9K
+&quot;Fq*S
+[~d.k9
+7iB;z
+Tp/rV
+&amp;uiBK&gt;
+P$))Td&amp;
+OrMq` 
+%S+qa
+X59N\
+S&amp;Mrx
+x(krhH
+$_rx#
+HQ&lt;9t
+z%C9q!e
+N~z=9|Y-9
+:l$M=s
+Q,`#G
+g,&#x27;xe
+L`:sX
+I;=wX
+d&#x27;7yy
+QLb.K
+*5hH[:
+(FI*P
+{&lt;&lt;M\x
+WLf){8
+ziNo&amp;
+uiK_&amp;
+{(MiKg
+@/~`&gt;{8
+ld&#x27;{9
+#vHOP
+6y)MM
+ztd(K
+?HuK=P
+^#NQ*
+JQ(&lt;C1j
+hL7F3
+h@k:0
+&gt;Y(&lt;A
+7{)F9j
+I2eiJ[z
+\~e7g
+Y,`3;
+tU=w(E
+HS~`6
+G~b)g
+95hI_
+iM;fq
+|A=~e*+9
+oLb9;8
+XD)Ae~` 
+*|K3~
+oiI[z3
+)f&quot;_3
+tc,K8
+IU~b 3
+Gd8&quot;O
+sIcBq:0
+vR SL
+=\%ET
+V.&amp;|B
+u&lt;&amp;Z]
+&amp;&amp;|J_
+b?}G[
+,`=wxc
+&lt;a:{I|
+~&amp;6Tb
+&amp;&gt;[lh
+cC9Z2
+^}C]2
+&lt;_86|
+_XAx76
+#II=Ny:2
+tf&quot;{x
+\#ye}D&lt;
+4g SY
+Q|Bcz3
+&gt;,b&#x27;7H_Oo
+=\%Ukg
+C&lt; [O
+3)@Qj
+ztb k
+gI?J|i
+luA5~a
+\&quot;_4g
+a8[yDt
+f6;It
+]uJMz
+?}I+F
+wy1K\x
+}1.|AO
+(Mm:3
+$)o&gt;P
+BE~d2
+J&gt;O5~g
+&amp;y35B-
+.Rw4_i
+d\hF3
+(I|(B
+e;!y|
+^x.&gt;|Bk&amp;r
+5&gt;|F3V
+PXn(JY
+2VTsT`(
+]\&amp;y-
+(1|H9j
+| JU:
+7I#!{
+y$&lt;ma
+##!vT$
+pB|OEB
+Y&#x27;GCw
+|KK:1
+^,R$4b-
+JiiqMpwwwwww
+hBK:2
+W|&amp;fq
+&lt;$Viw
+,`%[9
+,_hO0?Mp
+hM&#x27;z3
+!#9(D9j
+hL[z3
+el`;{9
+$#9)FE
+)HMfrR
+9~##E)O
+!Lb&gt;a
+;~&#x27;39(HI*
+ta&lt;K8
+(E=:2
+$9(CC
+hO)M[F
+&#x27;9NfJ
+iJ&#x27;z3
+=Q`@&quot;
+(BSF0
+$O`@wv
+6_`@/
+uQ{Ak&amp;
+4uhN?F1
+1)Kej
+hKo&amp;0
+(_HMvJP
+(DMZ3
+hB{z1
+KbLQ7
+Le);8
+(Mm:2
+,`#&#x27;xD
+iE&#x27;z3
+w;&#x27;HKQ
+e3&#x27;xJ
+hBXC8
+Q,f3gyL
+iKoF2
+(Jy*S
+&amp;ta&amp;a
+Ulf/G9
+Sq!7ehJ?
+=( ))
+%~P@&quot;
+7Y)@uZ
+&amp;;%(GK
+$&#x27;HEAj
+b&#x27;WxK
+hCWF1
+C~&#x27;-y
+=#XI8
+$5iDG
+{IMnJR
+b1&#x27;yI
+&lt; V99N.
+IT_MR
+_IK&gt;*
+|&amp;a3w
+sbwR?
+y(N=:
+&gt;$9Y(J
+)@kz1
+;bm46
+&gt;JzrQ
+hCO&amp;2
+&lt;5iJ7
+9g/y)E5:2
+}9Ec:0
+YL)D}
+,lP ?
+#9B RP 
+5)SYK
+iL{z1
++qH@RR
+\,ID0
+Zc~&#x27;-Y
+u#%Y)A5
+g|$to
+&#x27;59)@1*
+0gFrP
+HD*rP
+(UhL&#x27;
+(C#:0
+41##E
+Le){9
+w&quot;.6/R
+HN:rP
+,FR2S
+c)GxD
+^GB2R
+~Ld&gt;{9
+(Em:2
+hM?F0
+&quot;59(I%
+#&lt;%z,
+Q,d5{9
+Lb#;9
+0wyC 
+ -9(GC:s
+Y(L=Z
+|!VugArQ
+k&lt;!PS
+.?HPW
+(CC:1
+8UiL[z1
+IIV*Q
+HONZ2
+tb03X
+ps]KF
+Lg5[9
+i,a3;9
+F9NNj
+M_%%Y
+&lt;5hL+
+O_ .)
+&lt;fNd#
+o$&#x27;;ehJ?
+#6qIFV
+6~~&#x27;1
+Ul`&#x27;G
+&gt;s&amp;&quot;.
+-$#3y(Eu
+)D1JQ
+hMwF1
+HJ&gt;:1
+&lt;uiKw
+)iHO1
+,c9+X
+&quot;5iHK:
+IIFrR
+iIGz2
+E)FqJP
+e)Gy*P
+MiFsZ
+miG{:
+$#9)HI*R
+)AIJQ
+k4.^&#x27;^/
+}j;w;
+}ENIh/
+$^!^)&gt;S|N
+%^-^#
+ggI_e
+sZ!&gt;3
+7V%&gt;C
+sr~v\
+m!}&gt;Sr
+$9C=g
+qb^?(
+~a^38
+c~o|C
+\j^#^+
+x8wzZ
+y8/]j
+{5V~o/
+a1?3#
+1Y+uXb
+x&gt;&gt;*?
+eZ=gm
+xQx7C
+Y*myF
+\)}U)
+Vz?X{
+WHNx?
+k&lt;&gt;7=
+WCz|7
+c&gt;hTr
+_s;W_
+1_%9U
+se]se]se
+icb&lt;sL
+##~+a
+d.2_*
+_!^)&gt;S|
+gpKe\-
+R~Y79fI=
+P&lt;k_9
+&amp;1&gt;]rf
+v2&#x27;K9
+.eVJ|
+yF&lt;K|
+yx^o&gt;F&lt;&lt;
+Un,?&lt;
+I~{n,s
+/^,^*&gt;
+&gt;mR2g
+K$&#x27;\;
+d?2_H
+yzIr-o
+XN~I,g
+7O?&quot;zX6
+c^B9_
+Y(}U(}U(}U
+=$zx&gt;
+o%Rci
+uej&lt;O
+,[+^&#x27;^/
+qu&gt;`UUY
+JTTJTTJJ,JT
+6dLCF
+oP0GH
+[d8V~C&#x27;
+0^ N!
+07/1i[
+5[f~ga
+,5v=o
+O%p-p#p
+rJL~N
+{_(g_(&#x27;s
+I9.07/U
+zf}o4
+8;!N!
+0g.7e
+o2\L&lt;L
+SP6f~
+_lw\g
+U?g.$
+ekL[$\g
+9]b2g
+{.0?w
+I\$\Bi
+$&gt;(\G|H
+N!~Y8
+g4p$p4q
+oai{ 
+&lt;p&quot;p2
+L^9wA
+7i]Aa
+p/\g[h
+Cy f7
+i&gt;p!p2
+tM71#
+ByVB}
+[!~;p
+ f+p;q
+7ek&amp;^%
+&gt;F/0\
+s=+Tq
+a~^Hs
+p&amp;p6p10
+E.?sD
+GYUy6H&gt;
+U4/J9s
+VZ6Fi;
+W)};[i#
+ :[4Qt
+J4St5
+~d&amp;+]-
+7R;/w,
+{Hsi{
+S;mul
+_Na-u\
+(-!-&#x27;M
+38Mm?&quot;z
+FZOF8#
+-:F4Jt
+L&quot;-_kY1&lt;ng)
+&lt;{muY
+)=*zl
+Un/[g
+&gt;&#x27;Z&quot;zX
+i[i]5X
+}P4Qt
+cuYmsY
+Oc]h=N
+X3h^Y
+C{\yV
+RYgx~
+}7V~o
+^JeuYWS
+qj|vg
+lvnv6
+{;i}6o
+UFmPV
+uew4LV/
+rBnuu)u
+wMHa+
+rg*or
+/`;\p
+g)5gi
+(6.x-E
+ZbvGC
+yH0Y}K
+m7jh{F}
+[)8-R
+KB^Nm
+~iv7_&#x27;k=
+nkw9-
+s=ZO;
+llpc}-
+MInoF6
+jZ~5+R
+=fwi+
+rowo)
+r&#x27;#~2
+0XZO&amp;
+iJK6K
+08+\-
+}eh~]|
+=a___
+c1Y1\
+.\?:A
+}Hnu(
+rj`95
+|-q_c&gt;_#
+qMp~hB
+)y2p}
+Kc}Ec}E#_
+rvyYny[
+j}sZN_Z
+Os8:`
+k?Ldc
+ijg:/
+,{xq5=J
+ENq$d
+l)7+[
+S_oV4
+_U]Of
+&lt;l}X,~
+e|j}[L~l
+e}T,~
+~=jn&lt;
+y&gt;]DvS/
+&gt;z?Yl
+x_Z&gt;yB
+&gt;N3&gt;V
+MK!Cm3
+&gt;G;b,
+;&#x27;t8M
+2{t;_
+7&quot;neK
+/&amp;/9?)
+h6?v2;;
+qsl+v
+|2MY7$}
+s$&lt;V_/G
+GZa?ie
+A&#x27;=_+2
+wr&gt;YW
+FlC_s
+Mv_bS
+MGJ8y
+0Dl4T|A
+gr$_m
++;o&amp;q
+a1{#b2
+#s%&lt;#W</pre></div><details><summary>Machine-readable JSON (without strings)</summary><div><pre>{
+  &quot;schema_version&quot;: &quot;4.0&quot;,
+  &quot;tool&quot;: &quot;MAL&quot;,
+  &quot;tool_version&quot;: &quot;4.0&quot;,
+  &quot;generated_at&quot;: &quot;2026-10-26T05:56:00+00:00&quot;,
+  &quot;mode&quot;: &quot;file&quot;,
+  &quot;sample&quot;: {
+    &quot;name&quot;: &quot;app-release.apk&quot;,
+    &quot;path&quot;: &quot;C:\\Users\\DELL\\Videos\\files\\MAL_v4\\MAL_v4\\app-release.apk&quot;,
+    &quot;type&quot;: &quot;Android package (APK)&quot;,
+    &quot;kind&quot;: &quot;apk&quot;,
+    &quot;size&quot;: 1786865,
+    &quot;created&quot;: &quot;2026-10-26T11:24:03&quot;,
+    &quot;modified&quot;: &quot;2026-10-26T11:24:04&quot;,
+    &quot;md5&quot;: &quot;7a79def49463e594f38d7cb9683ae8c1&quot;,
+    &quot;sha1&quot;: &quot;a4b3328a54dcd1876930164c5ccc7d0e2a7a175f&quot;,
+    &quot;sha256&quot;: &quot;1836955b340cee9158e85c9a4f9997db5c6aed31e674c2277bd39f8b1fbc5f2a&quot;,
+    &quot;sha3_256&quot;: &quot;9dc2ac9df47e66c8466c7df88d384bc4be11e0212f6592315b36dd21c71b10e8&quot;,
+    &quot;ssdeep&quot;: &quot;49152:z9xO8sbv4L/xvJYwwfGCQtYfQCwnmZ+7M1kpVqVgAQ:z/Or4L/xhXcGCQq4QcnPkgx&quot;,
+    &quot;tlsh&quot;: &quot;T12C852393D360693DEE7B90701F8E53226272AD26C709E74FAAD9369C66371C91F003E5&quot;,
+    &quot;entropy&quot;: 7.966634,
+    &quot;entropy_map&quot;: [
+      7.947,
+      7.944,
+      7.926,
+      7.867,
+      7.93,
+      7.916,
+      7.917,
+      7.924,
+      7.934,
+      7.904,
+      7.94,
+      7.877,
+      7.678,
+      7.787,
+      7.971,
+      7.974,
+      7.97,
+      7.975,
+      7.979,
+      7.977,
+      7.972,
+      7.975,
+      7.973,
+      7.978,
+      7.976,
+      7.973,
+      7.969,
+      7.972,
+      7.96,
+      7.968,
+      7.955,
+      7.97,
+      7.98,
+      7.971,
+      7.964,
+      7.974,
+      7.976,
+      7.979,
+      7.968,
+      7.977,
+      7.975,
+      7.958,
+      7.976,
+      7.972,
+      7.984,
+      7.985,
+      7.979,
+      7.986,
+      7.976,
+      7.972,
+      7.982,
+      7.984,
+      7.985,
+      7.989,
+      7.981,
+      7.979,
+      7.984,
+      7.984,
+      7.985,
+      7.984,
+      7.985,
+      7.986,
+      7.986,
+      7.983,
+      7.978,
+      7.984,
+      7.985,
+      7.989,
+      7.988,
+      7.986,
+      7.984,
+      7.985,
+      7.983,
+      7.985,
+      7.987,
+      7.986,
+      7.974,
+      7.979,
+      7.982,
+      7.985,
+      7.986,
+      7.956,
+      7.943,
+      7.887,
+      7.883,
+      7.869,
+      7.984,
+      7.915,
+      7.813,
+      7.909,
+      7.88,
+      7.337,
+      6.016,
+      2.341,
+      5.07,
+      6.81
+    ]
+  },
+  &quot;string_count&quot;: 7455,
+  &quot;iocs&quot;: {
+    &quot;urls&quot;: [],
+    &quot;domains&quot;: [],
+    &quot;ips&quot;: [],
+    &quot;emails&quot;: [],
+    &quot;file_paths&quot;: [],
+    &quot;registry&quot;: [],
+    &quot;mutexes&quot;: [],
+    &quot;pipes&quot;: [],
+    &quot;pdb_paths&quot;: [],
+    &quot;crypto&quot;: [],
+    &quot;hashes&quot;: [],
+    &quot;_suppressed_benign&quot;: []
+  },
+  &quot;ioc_origin&quot;: {},
+  &quot;capabilities&quot;: [],
+  &quot;combos&quot;: [],
+  &quot;findings&quot;: [],
+  &quot;pe&quot;: null,
+  &quot;elf&quot;: null,
+  &quot;office&quot;: null,
+  &quot;pdf&quot;: null,
+  &quot;archive&quot;: {
+    &quot;available&quot;: true,
+    &quot;findings&quot;: [],
+    &quot;entries&quot;: [
+      {
+        &quot;name&quot;: &quot;META-INF/com/android/build/gradle/app-metadata.properties&quot;,
+        &quot;size&quot;: 56,
+        &quot;compressed&quot;: 52,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/version-control-info.textproto&quot;,
+        &quot;size&quot;: 46,
+        &quot;compressed&quot;: 48,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;assets/dexopt/baseline.prof&quot;,
+        &quot;size&quot;: 510,
+        &quot;compressed&quot;: 510,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;assets/dexopt/baseline.profm&quot;,
+        &quot;size&quot;: 97,
+        &quot;compressed&quot;: 97,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;classes.dex&quot;,
+        &quot;size&quot;: 4702068,
+        &quot;compressed&quot;: 1589620,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;classes2.dex&quot;,
+        &quot;size&quot;: 2052,
+        &quot;compressed&quot;: 826,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;assets/server.json&quot;,
+        &quot;size&quot;: 149,
+        &quot;compressed&quot;: 133,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;DebugProbesKt.bin&quot;,
+        &quot;size&quot;: 1738,
+        &quot;compressed&quot;: 782,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/androidx.activity_activity-ktx.version&quot;,
+        &quot;size&quot;: 7,
+        &quot;compressed&quot;: 7,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/androidx.activity_activity.version&quot;,
+        &quot;size&quot;: 7,
+        &quot;compressed&quot;: 7,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/androidx.annotation_annotation-experimental.version&quot;,
+        &quot;size&quot;: 6,
+        &quot;compressed&quot;: 6,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/androidx.arch.core_core-runtime.version&quot;,
+        &quot;size&quot;: 67,
+        &quot;compressed&quot;: 61,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/androidx.core_core-ktx.version&quot;,
+        &quot;size&quot;: 7,
+        &quot;compressed&quot;: 7,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/androidx.core_core-viewtree.version&quot;,
+        &quot;size&quot;: 6,
+        &quot;compressed&quot;: 6,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/androidx.core_core.version&quot;,
+        &quot;size&quot;: 7,
+        &quot;compressed&quot;: 7,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/androidx.interpolator_interpolator.version&quot;,
+        &quot;size&quot;: 6,
+        &quot;compressed&quot;: 6,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/androidx.lifecycle_lifecycle-livedata-core.version&quot;,
+        &quot;size&quot;: 78,
+        &quot;compressed&quot;: 67,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/androidx.lifecycle_lifecycle-runtime-ktx.version&quot;,
+        &quot;size&quot;: 76,
+        &quot;compressed&quot;: 65,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/androidx.lifecycle_lifecycle-runtime.version&quot;,
+        &quot;size&quot;: 72,
+        &quot;compressed&quot;: 61,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/androidx.lifecycle_lifecycle-viewmodel-ktx.version&quot;,
+        &quot;size&quot;: 78,
+        &quot;compressed&quot;: 67,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/androidx.lifecycle_lifecycle-viewmodel-savedstate.version&quot;,
+        &quot;size&quot;: 85,
+        &quot;compressed&quot;: 74,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/androidx.lifecycle_lifecycle-viewmodel.version&quot;,
+        &quot;size&quot;: 74,
+        &quot;compressed&quot;: 63,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/androidx.profileinstaller_profileinstaller.version&quot;,
+        &quot;size&quot;: 6,
+        &quot;compressed&quot;: 6,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/androidx.savedstate_savedstate-ktx.version&quot;,
+        &quot;size&quot;: 6,
+        &quot;compressed&quot;: 6,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/androidx.savedstate_savedstate.version&quot;,
+        &quot;size&quot;: 6,
+        &quot;compressed&quot;: 6,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/androidx.startup_startup-runtime.version&quot;,
+        &quot;size&quot;: 6,
+        &quot;compressed&quot;: 6,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/androidx.tracing_tracing.version&quot;,
+        &quot;size&quot;: 6,
+        &quot;compressed&quot;: 6,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/androidx.versionedparcelable_versionedparcelable.version&quot;,
+        &quot;size&quot;: 6,
+        &quot;compressed&quot;: 6,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/kotlinx_coroutines_android.version&quot;,
+        &quot;size&quot;: 5,
+        &quot;compressed&quot;: 5,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/kotlinx_coroutines_core.version&quot;,
+        &quot;size&quot;: 5,
+        &quot;compressed&quot;: 5,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/services/kotlinx.coroutines.CoroutineExceptionHandler&quot;,
+        &quot;size&quot;: 54,
+        &quot;compressed&quot;: 50,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/services/kotlinx.coroutines.internal.MainDispatcherFactory&quot;,
+        &quot;size&quot;: 52,
+        &quot;compressed&quot;: 49,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;kotlin-tooling-metadata.json&quot;,
+        &quot;size&quot;: 626,
+        &quot;compressed&quot;: 284,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;kotlin/annotation/annotation.kotlin_builtins&quot;,
+        &quot;size&quot;: 928,
+        &quot;compressed&quot;: 561,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;kotlin/collections/collections.kotlin_builtins&quot;,
+        &quot;size&quot;: 3685,
+        &quot;compressed&quot;: 1521,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;kotlin/coroutines/coroutines.kotlin_builtins&quot;,
+        &quot;size&quot;: 200,
+        &quot;compressed&quot;: 157,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;kotlin/internal/internal.kotlin_builtins&quot;,
+        &quot;size&quot;: 646,
+        &quot;compressed&quot;: 394,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;kotlin/kotlin.kotlin_builtins&quot;,
+        &quot;size&quot;: 18661,
+        &quot;compressed&quot;: 5257,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;kotlin/ranges/ranges.kotlin_builtins&quot;,
+        &quot;size&quot;: 3399,
+        &quot;compressed&quot;: 1292,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;kotlin/reflect/reflect.kotlin_builtins&quot;,
+        &quot;size&quot;: 2426,
+        &quot;compressed&quot;: 1286,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;AndroidManifest.xml&quot;,
+        &quot;size&quot;: 5872,
+        &quot;compressed&quot;: 1675,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/-6.webp&quot;,
+        &quot;size&quot;: 10402,
+        &quot;compressed&quot;: 10402,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/0K.xml&quot;,
+        &quot;size&quot;: 548,
+        &quot;compressed&quot;: 241,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/0Z.png&quot;,
+        &quot;size&quot;: 1171,
+        &quot;compressed&quot;: 1171,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/0w.xml&quot;,
+        &quot;size&quot;: 5696,
+        &quot;compressed&quot;: 979,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/13.webp&quot;,
+        &quot;size&quot;: 2326,
+        &quot;compressed&quot;: 2326,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/2K.9.png&quot;,
+        &quot;size&quot;: 225,
+        &quot;compressed&quot;: 225,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/4z.xml&quot;,
+        &quot;size&quot;: 876,
+        &quot;compressed&quot;: 415,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/5P.png&quot;,
+        &quot;size&quot;: 628,
+        &quot;compressed&quot;: 628,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/5c.png&quot;,
+        &quot;size&quot;: 138,
+        &quot;compressed&quot;: 138,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/5c.webp&quot;,
+        &quot;size&quot;: 7746,
+        &quot;compressed&quot;: 7746,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/5v.png&quot;,
+        &quot;size&quot;: 201,
+        &quot;compressed&quot;: 201,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/6P.png&quot;,
+        &quot;size&quot;: 199,
+        &quot;compressed&quot;: 199,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/6d.png&quot;,
+        &quot;size&quot;: 452,
+        &quot;compressed&quot;: 452,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/71.png&quot;,
+        &quot;size&quot;: 290,
+        &quot;compressed&quot;: 290,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/7V.png&quot;,
+        &quot;size&quot;: 254,
+        &quot;compressed&quot;: 254,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/7m.png&quot;,
+        &quot;size&quot;: 884,
+        &quot;compressed&quot;: 884,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/8t.xml&quot;,
+        &quot;size&quot;: 1356,
+        &quot;compressed&quot;: 663,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/9Q.webp&quot;,
+        &quot;size&quot;: 3248,
+        &quot;compressed&quot;: 3248,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/9m.xml&quot;,
+        &quot;size&quot;: 304,
+        &quot;compressed&quot;: 172,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/Ac.xml&quot;,
+        &quot;size&quot;: 772,
+        &quot;compressed&quot;: 421,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/Ag.png&quot;,
+        &quot;size&quot;: 465,
+        &quot;compressed&quot;: 465,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/BT.png&quot;,
+        &quot;size&quot;: 264,
+        &quot;compressed&quot;: 264,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/BW.xml&quot;,
+        &quot;size&quot;: 548,
+        &quot;compressed&quot;: 241,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/C_.9.png&quot;,
+        &quot;size&quot;: 215,
+        &quot;compressed&quot;: 215,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/Ck.png&quot;,
+        &quot;size&quot;: 823,
+        &quot;compressed&quot;: 823,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/D-.xml&quot;,
+        &quot;size&quot;: 1528,
+        &quot;compressed&quot;: 734,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/Ec.png&quot;,
+        &quot;size&quot;: 206,
+        &quot;compressed&quot;: 206,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/Ff.png&quot;,
+        &quot;size&quot;: 317,
+        &quot;compressed&quot;: 317,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/G2.xml&quot;,
+        &quot;size&quot;: 736,
+        &quot;compressed&quot;: 401,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/GY.png&quot;,
+        &quot;size&quot;: 290,
+        &quot;compressed&quot;: 290,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/LO.png&quot;,
+        &quot;size&quot;: 264,
+        &quot;compressed&quot;: 264,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/MD.png&quot;,
+        &quot;size&quot;: 1171,
+        &quot;compressed&quot;: 1171,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/MO.webp&quot;,
+        &quot;size&quot;: 1662,
+        &quot;compressed&quot;: 1662,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/Ma.9.png&quot;,
+        &quot;size&quot;: 247,
+        &quot;compressed&quot;: 247,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/Nt.webp&quot;,
+        &quot;size&quot;: 1470,
+        &quot;compressed&quot;: 1470,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/OM.png&quot;,
+        &quot;size&quot;: 384,
+        &quot;compressed&quot;: 384,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/OX.png&quot;,
+        &quot;size&quot;: 375,
+        &quot;compressed&quot;: 375,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/OX1.png&quot;,
+        &quot;size&quot;: 465,
+        &quot;compressed&quot;: 465,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/Q-.png&quot;,
+        &quot;size&quot;: 270,
+        &quot;compressed&quot;: 270,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/S8.xml&quot;,
+        &quot;size&quot;: 1052,
+        &quot;compressed&quot;: 486,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/Sn.webp&quot;,
+        &quot;size&quot;: 3574,
+        &quot;compressed&quot;: 3574,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/Tl.xml&quot;,
+        &quot;size&quot;: 1320,
+        &quot;compressed&quot;: 644,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/Tr.png&quot;,
+        &quot;size&quot;: 254,
+        &quot;compressed&quot;: 254,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/U-.9.png&quot;,
+        &quot;size&quot;: 223,
+        &quot;compressed&quot;: 223,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/VW.png&quot;,
+        &quot;size&quot;: 452,
+        &quot;compressed&quot;: 452,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/W5.png&quot;,
+        &quot;size&quot;: 472,
+        &quot;compressed&quot;: 472,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/Ws.xml&quot;,
+        &quot;size&quot;: 1180,
+        &quot;compressed&quot;: 467,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/Y3.png&quot;,
+        &quot;size&quot;: 384,
+        &quot;compressed&quot;: 384,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/Y9.png&quot;,
+        &quot;size&quot;: 623,
+        &quot;compressed&quot;: 623,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/YD.png&quot;,
+        &quot;size&quot;: 201,
+        &quot;compressed&quot;: 201,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/_H.xml&quot;,
+        &quot;size&quot;: 1492,
+        &quot;compressed&quot;: 712,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/_y.xml&quot;,
+        &quot;size&quot;: 612,
+        &quot;compressed&quot;: 309,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/a0.xml&quot;,
+        &quot;size&quot;: 1228,
+        &quot;compressed&quot;: 535,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/aR.png&quot;,
+        &quot;size&quot;: 623,
+        &quot;compressed&quot;: 623,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/aU.png&quot;,
+        &quot;size&quot;: 628,
+        &quot;compressed&quot;: 628,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/bi.png&quot;,
+        &quot;size&quot;: 317,
+        &quot;compressed&quot;: 317,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/c6.xml&quot;,
+        &quot;size&quot;: 372,
+        &quot;compressed&quot;: 184,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/cV.xml&quot;,
+        &quot;size&quot;: 440,
+        &quot;compressed&quot;: 261,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/cr.xml&quot;,
+        &quot;size&quot;: 364,
+        &quot;compressed&quot;: 201,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/d2.webp&quot;,
+        &quot;size&quot;: 1152,
+        &quot;compressed&quot;: 1152,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/df.xml&quot;,
+        &quot;size&quot;: 532,
+        &quot;compressed&quot;: 252,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/fq.webp&quot;,
+        &quot;size&quot;: 3116,
+        &quot;compressed&quot;: 3116,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/gK.9.png&quot;,
+        &quot;size&quot;: 215,
+        &quot;compressed&quot;: 215,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/gr.png&quot;,
+        &quot;size&quot;: 472,
+        &quot;compressed&quot;: 472,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/iE.webp&quot;,
+        &quot;size&quot;: 5288,
+        &quot;compressed&quot;: 5288,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/iQ.xml&quot;,
+        &quot;size&quot;: 988,
+        &quot;compressed&quot;: 418,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/j_.webp&quot;,
+        &quot;size&quot;: 7236,
+        &quot;compressed&quot;: 7236,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/je.9.png&quot;,
+        &quot;size&quot;: 212,
+        &quot;compressed&quot;: 212,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/kS.png&quot;,
+        &quot;size&quot;: 375,
+        &quot;compressed&quot;: 375,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/lR.xml&quot;,
+        &quot;size&quot;: 440,
+        &quot;compressed&quot;: 260,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/nz.xml&quot;,
+        &quot;size&quot;: 532,
+        &quot;compressed&quot;: 252,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/o_.9.png&quot;,
+        &quot;size&quot;: 252,
+        &quot;compressed&quot;: 252,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/p8.png&quot;,
+        &quot;size&quot;: 823,
+        &quot;compressed&quot;: 823,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/pY.png&quot;,
+        &quot;size&quot;: 107,
+        &quot;compressed&quot;: 107,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/pu.png&quot;,
+        &quot;size&quot;: 909,
+        &quot;compressed&quot;: 909,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/qs.webp&quot;,
+        &quot;size&quot;: 2252,
+        &quot;compressed&quot;: 2252,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/s4.png&quot;,
+        &quot;size&quot;: 98,
+        &quot;compressed&quot;: 98,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/sA.9.png&quot;,
+        &quot;size&quot;: 212,
+        &quot;compressed&quot;: 212,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/sK.webp&quot;,
+        &quot;size&quot;: 5432,
+        &quot;compressed&quot;: 5432,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/td.png&quot;,
+        &quot;size&quot;: 199,
+        &quot;compressed&quot;: 199,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/u5.webp&quot;,
+        &quot;size&quot;: 4474,
+        &quot;compressed&quot;: 4474,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/v9.xml&quot;,
+        &quot;size&quot;: 468,
+        &quot;compressed&quot;: 237,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/vL.9.png&quot;,
+        &quot;size&quot;: 223,
+        &quot;compressed&quot;: 223,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/w7.png&quot;,
+        &quot;size&quot;: 270,
+        &quot;compressed&quot;: 270,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/wN.9.png&quot;,
+        &quot;size&quot;: 225,
+        &quot;compressed&quot;: 225,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/xN.xml&quot;,
+        &quot;size&quot;: 2456,
+        &quot;compressed&quot;: 785,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/xa.9.png&quot;,
+        &quot;size&quot;: 221,
+        &quot;compressed&quot;: 221,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/yw.webp&quot;,
+        &quot;size&quot;: 1986,
+        &quot;compressed&quot;: 1986,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/z-.9.png&quot;,
+        &quot;size&quot;: 221,
+        &quot;compressed&quot;: 221,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/zL.png&quot;,
+        &quot;size&quot;: 206,
+        &quot;compressed&quot;: 206,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;res/zz.png&quot;,
+        &quot;size&quot;: 884,
+        &quot;compressed&quot;: 884,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;resources.arsc&quot;,
+        &quot;size&quot;: 57604,
+        &quot;compressed&quot;: 57604,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/CERT.SF&quot;,
+        &quot;size&quot;: 12478,
+        &quot;compressed&quot;: 5839,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/CERT.RSA&quot;,
+        &quot;size&quot;: 1317,
+        &quot;compressed&quot;: 1055,
+        &quot;encrypted&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;META-INF/MANIFEST.MF&quot;,
+        &quot;size&quot;: 12404,
+        &quot;compressed&quot;: 4944,
+        &quot;encrypted&quot;: false
+      }
+    ],
+    &quot;entry_count&quot;: 136,
+    &quot;total_uncompressed&quot;: 4935393
+  },
+  &quot;deobfuscation&quot;: {
+    &quot;layers&quot;: [],
+    &quot;carved_pe&quot;: [],
+    &quot;embedded_pe&quot;: [],
+    &quot;xor&quot;: {
+      &quot;hits&quot;: [],
+      &quot;pe&quot;: [],
+      &quot;truncated&quot;: false
+    }
+  },
+  &quot;yara&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;matches&quot;: [],
+    &quot;error&quot;: null,
+    &quot;rules_loaded&quot;: 2
+  },
+  &quot;intel&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;requested&quot;: [
+      &quot;vt&quot;,
+      &quot;mb&quot;,
+      &quot;urlhaus&quot;,
+      &quot;threatfox&quot;,
+      &quot;otx&quot;,
+      &quot;ha&quot;,
+      &quot;abuseipdb&quot;
+    ],
+    &quot;providers&quot;: {
+      &quot;vt&quot;: {
+        &quot;provider&quot;: &quot;vt&quot;,
+        &quot;label&quot;: &quot;VirusTotal&quot;,
+        &quot;status&quot;: &quot;ok&quot;,
+        &quot;sha256&quot;: &quot;1836955b340cee9158e85c9a4f9997db5c6aed31e674c2277bd39f8b1fbc5f2a&quot;,
+        &quot;malicious&quot;: 0,
+        &quot;suspicious&quot;: 0,
+        &quot;harmless&quot;: 0,
+        &quot;undetected&quot;: 67,
+        &quot;timeout&quot;: 0,
+        &quot;unsupported&quot;: 8,
+        &quot;total_engines&quot;: 67,
+        &quot;detection_ratio&quot;: 0.0,
+        &quot;reputation&quot;: 0,
+        &quot;votes&quot;: {
+          &quot;harmless&quot;: 0,
+          &quot;malicious&quot;: 0
+        },
+        &quot;meaningful_name&quot;: &quot;app-release.apk&quot;,
+        &quot;names&quot;: [
+          &quot;app-release.apk&quot;
+        ],
+        &quot;type_description&quot;: &quot;Android&quot;,
+        &quot;type_tag&quot;: &quot;android&quot;,
+        &quot;size&quot;: 1786865,
+        &quot;tags&quot;: [
+          &quot;android&quot;,
+          &quot;apk&quot;,
+          &quot;obfuscated&quot;,
+          &quot;checks-gps&quot;,
+          &quot;telephony&quot;,
+          &quot;reflection&quot;
+        ],
+        &quot;capabilities&quot;: [],
+        &quot;first_submission&quot;: &quot;2026-10-01 06:43:27 UTC&quot;,
+        &quot;last_submission&quot;: &quot;2026-10-01 06:43:27 UTC&quot;,
+        &quot;last_analysis&quot;: &quot;2026-10-01 06:43:27 UTC&quot;,
+        &quot;creation_date&quot;: null,
+        &quot;times_submitted&quot;: 1,
+        &quot;unique_sources&quot;: 1,
+        &quot;threat_label&quot;: &quot;&quot;,
+        &quot;threat_categories&quot;: [],
+        &quot;threat_families&quot;: [],
+        &quot;flagged_engines&quot;: [],
+        &quot;sandbox_verdicts&quot;: [
+          {
+            &quot;sandbox&quot;: &quot;Zenbox android&quot;,
+            &quot;category&quot;: &quot;harmless&quot;,
+            &quot;confidence&quot;: 93,
+            &quot;classification&quot;: [
+              &quot;CLEAN&quot;
+            ],
+            &quot;names&quot;: []
+          }
+        ],
+        &quot;crowdsourced_yara&quot;: [],
+        &quot;sigma&quot;: [],
+        &quot;sigma_stats&quot;: {},
+        &quot;ids&quot;: [],
+        &quot;signature&quot;: {},
+        &quot;code_insight&quot;: [],
+        &quot;hashes&quot;: {
+          &quot;md5&quot;: &quot;7a79def49463e594f38d7cb9683ae8c1&quot;,
+          &quot;sha1&quot;: &quot;a4b3328a54dcd1876930164c5ccc7d0e2a7a175f&quot;,
+          &quot;sha256&quot;: &quot;1836955b340cee9158e85c9a4f9997db5c6aed31e674c2277bd39f8b1fbc5f2a&quot;,
+          &quot;ssdeep&quot;: &quot;49152:z9xO8sbv4L/xvJYwwfGCQtYfQCwnmZ+7M1kpVqVgAQ:z/Or4L/xhXcGCQq4QcnPkgx&quot;,
+          &quot;tlsh&quot;: &quot;T12C852393D360693DEE7B90701F8E53226272AD26C709E74FAAD9369C66371C91F003E5&quot;,
+          &quot;vhash&quot;: &quot;d9cd50d26f46994e4f5e9360ca3041f5&quot;,
+          &quot;authentihash&quot;: null,
+          &quot;imphash&quot;: null
+        },
+        &quot;trid&quot;: [
+          &quot;Android Package (60.6%)&quot;,
+          &quot;Java Archive (30.3%)&quot;,
+          &quot;ZIP compressed archive (8.9%)&quot;
+        ],
+        &quot;packers&quot;: [],
+        &quot;permalink&quot;: &quot;https://www.virustotal.com/gui/file/1836955b340cee9158e85c9a4f9997db5c6aed31e674c2277bd39f8b1fbc5f2a&quot;,
+        &quot;from_cache&quot;: false,
+        &quot;depth&quot;: &quot;standard&quot;,
+        &quot;calls_note&quot;: &quot;~5 API calls&quot;,
+        &quot;behaviour&quot;: {
+          &quot;status&quot;: &quot;ok&quot;,
+          &quot;processes_created&quot;: [],
+          &quot;command_executions&quot;: [],
+          &quot;files_written&quot;: [],
+          &quot;files_dropped&quot;: [],
+          &quot;files_deleted&quot;: [],
+          &quot;registry_keys_set&quot;: [],
+          &quot;registry_keys_deleted&quot;: [],
+          &quot;mutexes_created&quot;: [],
+          &quot;services_started&quot;: [],
+          &quot;modules_loaded&quot;: [],
+          &quot;dns_lookups&quot;: [
+            &quot;chatgpt.com -&gt; 172.64.155.209, 104.18.32.47&quot;,
+            &quot;downloads.blissroms.org -&gt; 104.21.64.137, 172.67.151.52&quot;,
+            &quot;infinitedata-pa.googleapis.com -&gt; 172.217.118.4, 172.217.114.4, 172.217.112.4, 172.217.113.4, 172.217.117.4, 172.2...&quot;,
+            &quot;www.googleapis.com -&gt; 172.217.114.4, 172.217.112.4, 172.217.113.4, 172.217.119.4, 172.217.117.4, 172.2...&quot;
+          ],
+          &quot;ip_traffic&quot;: [
+            &quot;172.217.214.94:443 /TCP&quot;,
+            &quot;192.178.129.138:443 /TCP&quot;,
+            &quot;74.125.126.95:443 /TCP&quot;,
+            &quot;104.21.64.137:443 /TCP&quot;,
+            &quot;74.125.202.106:443 /TCP&quot;,
+            &quot;74.125.202.100:443 /TCP&quot;,
+            &quot;64.233.181.95:443 /TCP&quot;,
+            &quot;172.64.155.209:443 /TCP&quot;
+          ],
+          &quot;http_conversations&quot;: [],
+          &quot;mitre_attack_techniques&quot;: [
+            {
+              &quot;id&quot;: &quot;T1406&quot;,
+              &quot;severity&quot;: &quot;IMPACT_SEVERITY_INFO&quot;,
+              &quot;description&quot;: &quot;Obfuscates method names&quot;
+            },
+            {
+              &quot;id&quot;: &quot;T1421&quot;,
+              &quot;severity&quot;: &quot;IMPACT_SEVERITY_INFO&quot;,
+              &quot;description&quot;: &quot;Checks an internet connection is available&quot;
+            },
+            {
+              &quot;id&quot;: &quot;T1430&quot;,
+              &quot;severity&quot;: &quot;IMPACT_SEVERITY_INFO&quot;,
+              &quot;description&quot;: &quot;Queries the phones location (GPS)&quot;
+            },
+            {
+              &quot;id&quot;: &quot;T1430&quot;,
+              &quot;severity&quot;: &quot;IMPACT_SEVERITY_INFO&quot;,
+              &quot;description&quot;: &quot;Has permission to query the current location&quot;
+            },
+            {
+              &quot;id&quot;: &quot;T1426&quot;,
+              &quot;severity&quot;: &quot;IMPACT_SEVERITY_INFO&quot;,
+              &quot;description&quot;: &quot;Queries the unqiue device ID (IMEI, MEID or ESN)&quot;
+            },
+            {
+              &quot;id&quot;: &quot;T1573&quot;,
+              &quot;severity&quot;: &quot;IMPACT_SEVERITY_INFO&quot;,
+              &quot;description&quot;: &quot;Uses HTTPS&quot;
+            },
+            {
+              &quot;id&quot;: &quot;T1071&quot;,
+              &quot;severity&quot;: &quot;IMPACT_SEVERITY_INFO&quot;,
+              &quot;description&quot;: &quot;Uses HTTPS&quot;
+            }
+          ],
+          &quot;tags&quot;: [
+            &quot;OBFUSCATED&quot;,
+            &quot;CHECKS_GPS&quot;,
+            &quot;TELEPHONY&quot;,
+            &quot;REFLECTION&quot;
+          ],
+          &quot;verdicts&quot;: [
+            &quot;CLEAN&quot;
+          ],
+          &quot;verdict_labels&quot;: [],
+          &quot;calls_highlighted&quot;: [],
+          &quot;text_highlighted&quot;: []
+        },
+        &quot;relationships&quot;: {
+          &quot;contacted_domains&quot;: {
+            &quot;status&quot;: &quot;ok&quot;,
+            &quot;count&quot;: 4,
+            &quot;items&quot;: [
+              {
+                &quot;value&quot;: &quot;chatgpt.com&quot;,
+                &quot;malicious&quot;: 0,
+                &quot;reputation&quot;: 8,
+                &quot;country&quot;: null,
+                &quot;owner&quot;: &quot;&quot;
+              },
+              {
+                &quot;value&quot;: &quot;downloads.blissroms.org&quot;,
+                &quot;malicious&quot;: 0,
+                &quot;reputation&quot;: 0,
+                &quot;country&quot;: null,
+                &quot;owner&quot;: &quot;&quot;
+              },
+              {
+                &quot;value&quot;: &quot;infinitedata-pa.googleapis.com&quot;,
+                &quot;malicious&quot;: 0,
+                &quot;reputation&quot;: -1,
+                &quot;country&quot;: null,
+                &quot;owner&quot;: &quot;&quot;
+              },
+              {
+                &quot;value&quot;: &quot;www.googleapis.com&quot;,
+                &quot;malicious&quot;: 0,
+                &quot;reputation&quot;: 1,
+                &quot;country&quot;: null,
+                &quot;owner&quot;: &quot;&quot;
+              }
+            ]
+          },
+          &quot;contacted_ips&quot;: {
+            &quot;status&quot;: &quot;ok&quot;,
+            &quot;count&quot;: 18,
+            &quot;items&quot;: [
+              {
+                &quot;value&quot;: &quot;104.18.32.47&quot;,
+                &quot;malicious&quot;: 0,
+                &quot;reputation&quot;: -4,
+                &quot;country&quot;: null,
+                &quot;owner&quot;: &quot;Cloudflare, Inc.&quot;
+              },
+              {
+                &quot;value&quot;: &quot;104.21.64.137&quot;,
+                &quot;malicious&quot;: 0,
+                &quot;reputation&quot;: -8,
+                &quot;country&quot;: null,
+                &quot;owner&quot;: &quot;Cloudflare, Inc.&quot;
+              },
+              {
+                &quot;value&quot;: &quot;172.217.112.4&quot;,
+                &quot;malicious&quot;: 0,
+                &quot;reputation&quot;: 0,
+                &quot;country&quot;: &quot;US&quot;,
+                &quot;owner&quot;: &quot;Google LLC&quot;
+              },
+              {
+                &quot;value&quot;: &quot;172.217.113.4&quot;,
+                &quot;malicious&quot;: 0,
+                &quot;reputation&quot;: 0,
+                &quot;country&quot;: &quot;US&quot;,
+                &quot;owner&quot;: &quot;Google LLC&quot;
+              },
+              {
+                &quot;value&quot;: &quot;172.217.114.4&quot;,
+                &quot;malicious&quot;: 0,
+                &quot;reputation&quot;: 0,
+                &quot;country&quot;: &quot;US&quot;,
+                &quot;owner&quot;: &quot;Google LLC&quot;
+              },
+              {
+                &quot;value&quot;: &quot;172.217.115.4&quot;,
+                &quot;malicious&quot;: 0,
+                &quot;reputation&quot;: 0,
+                &quot;country&quot;: &quot;US&quot;,
+                &quot;owner&quot;: &quot;Google LLC&quot;
+              },
+              {
+                &quot;value&quot;: &quot;172.217.116.4&quot;,
+                &quot;malicious&quot;: 0,
+                &quot;reputation&quot;: 0,
+                &quot;country&quot;: &quot;US&quot;,
+                &quot;owner&quot;: &quot;Google LLC&quot;
+              },
+              {
+                &quot;value&quot;: &quot;172.217.117.4&quot;,
+                &quot;malicious&quot;: 0,
+                &quot;reputation&quot;: 0,
+                &quot;country&quot;: &quot;US&quot;,
+                &quot;owner&quot;: &quot;Google LLC&quot;
+              },
+              {
+                &quot;value&quot;: &quot;172.217.118.4&quot;,
+                &quot;malicious&quot;: 0,
+                &quot;reputation&quot;: 0,
+                &quot;country&quot;: &quot;US&quot;,
+                &quot;owner&quot;: &quot;Google LLC&quot;
+              },
+              {
+                &quot;value&quot;: &quot;172.217.119.4&quot;,
+                &quot;malicious&quot;: 0,
+                &quot;reputation&quot;: 0,
+                &quot;country&quot;: &quot;US&quot;,
+                &quot;owner&quot;: &quot;Google LLC&quot;
+              },
+              {
+                &quot;value&quot;: &quot;172.217.214.94&quot;,
+                &quot;malicious&quot;: 0,
+                &quot;reputation&quot;: -42,
+                &quot;country&quot;: &quot;US&quot;,
+                &quot;owner&quot;: &quot;Google LLC&quot;
+              },
+              {
+                &quot;value&quot;: &quot;172.64.155.209&quot;,
+                &quot;malicious&quot;: 0,
+                &quot;reputation&quot;: 0,
+                &quot;country&quot;: null,
+                &quot;owner&quot;: &quot;Cloudflare, Inc.&quot;
+              },
+              {
+                &quot;value&quot;: &quot;172.67.151.52&quot;,
+                &quot;malicious&quot;: 0,
+                &quot;reputation&quot;: 0,
+                &quot;country&quot;: null,
+                &quot;owner&quot;: &quot;Cloudflare, Inc.&quot;
+              },
+              {
+                &quot;value&quot;: &quot;192.178.129.138&quot;,
+                &quot;malicious&quot;: 0,
+                &quot;reputation&quot;: 0,
+                &quot;country&quot;: &quot;US&quot;,
+                &quot;owner&quot;: &quot;Google LLC&quot;
+              },
+              {
+                &quot;value&quot;: &quot;64.233.181.95&quot;,
+                &quot;malicious&quot;: 0,
+                &quot;reputation&quot;: 0,
+                &quot;country&quot;: &quot;US&quot;,
+                &quot;owner&quot;: &quot;Google LLC&quot;
+              },
+              {
+                &quot;value&quot;: &quot;74.125.126.95&quot;,
+                &quot;malicious&quot;: 0,
+                &quot;reputation&quot;: -44,
+                &quot;country&quot;: &quot;US&quot;,
+                &quot;owner&quot;: &quot;Google LLC&quot;
+              },
+              {
+                &quot;value&quot;: &quot;74.125.202.100&quot;,
+                &quot;malicious&quot;: 0,
+                &quot;reputation&quot;: 0,
+                &quot;country&quot;: &quot;US&quot;,
+                &quot;owner&quot;: &quot;Google LLC&quot;
+              },
+              {
+                &quot;value&quot;: &quot;74.125.202.106&quot;,
+                &quot;malicious&quot;: 0,
+                &quot;reputation&quot;: 1,
+                &quot;country&quot;: &quot;US&quot;,
+                &quot;owner&quot;: &quot;Google LLC&quot;
+              }
+            ]
+          },
+          &quot;dropped_files&quot;: {
+            &quot;status&quot;: &quot;ok&quot;,
+            &quot;count&quot;: 0,
+            &quot;items&quot;: []
+          }
+        }
+      },
+      &quot;mb&quot;: {
+        &quot;provider&quot;: &quot;mb&quot;,
+        &quot;label&quot;: &quot;MalwareBazaar&quot;,
+        &quot;status&quot;: &quot;not_found&quot;
+      },
+      &quot;urlhaus&quot;: {
+        &quot;provider&quot;: &quot;urlhaus&quot;,
+        &quot;label&quot;: &quot;URLhaus&quot;,
+        &quot;status&quot;: &quot;not_found&quot;
+      },
+      &quot;threatfox&quot;: {
+        &quot;provider&quot;: &quot;threatfox&quot;,
+        &quot;label&quot;: &quot;ThreatFox&quot;,
+        &quot;status&quot;: &quot;not_found&quot;
+      },
+      &quot;otx&quot;: {
+        &quot;provider&quot;: &quot;otx&quot;,
+        &quot;label&quot;: &quot;AlienVault OTX&quot;,
+        &quot;status&quot;: &quot;not_found&quot;,
+        &quot;pulse_count&quot;: 0,
+        &quot;pulses&quot;: [],
+        &quot;families&quot;: [],
+        &quot;attack_ids&quot;: [],
+        &quot;tags&quot;: [],
+        &quot;permalink&quot;: &quot;https://otx.alienvault.com/indicator/file/1836955b340cee9158e85c9a4f9997db5c6aed31e674c2277bd39f8b1fbc5f2a&quot;
+      },
+      &quot;ha&quot;: {
+        &quot;provider&quot;: &quot;ha&quot;,
+        &quot;label&quot;: &quot;Hybrid Analysis&quot;,
+        &quot;status&quot;: &quot;not_found&quot;
+      },
+      &quot;abuseipdb&quot;: {
+        &quot;provider&quot;: &quot;abuseipdb&quot;,
+        &quot;label&quot;: &quot;AbuseIPDB&quot;,
+        &quot;status&quot;: &quot;skipped&quot;,
+        &quot;error&quot;: &quot;Network-only provider; use --enrich to query IPs.&quot;
+      }
+    },
+    &quot;network&quot;: {},
+    &quot;enrichment_enabled&quot;: true,
+    &quot;queried_with&quot;: {
+      &quot;hash_lookup&quot;: [
+        &quot;vt&quot;,
+        &quot;mb&quot;,
+        &quot;urlhaus&quot;,
+        &quot;threatfox&quot;,
+        &quot;otx&quot;,
+        &quot;ha&quot;
+      ],
+      &quot;note&quot;: &quot;File hashes AND the listed domains/IPs extracted from the sample were sent to the selected providers.&quot;,
+      &quot;enrich_ips&quot;: [],
+      &quot;enrich_domains&quot;: []
+    },
+    &quot;summary&quot;: {
+      &quot;verdict&quot;: &quot;no_detections&quot;,
+      &quot;providers_ok&quot;: [
+        &quot;vt&quot;
+      ],
+      &quot;providers_not_found&quot;: [
+        &quot;mb&quot;,
+        &quot;urlhaus&quot;,
+        &quot;threatfox&quot;,
+        &quot;otx&quot;,
+        &quot;ha&quot;
+      ],
+      &quot;providers_failed&quot;: [],
+      &quot;providers_skipped&quot;: [
+        &quot;abuseipdb&quot;
+      ],
+      &quot;hits&quot;: [],
+      &quot;vt_malicious&quot;: 0,
+      &quot;vt_suspicious&quot;: 0,
+      &quot;vt_total&quot;: 67,
+      &quot;ha_verdict&quot;: &quot;&quot;,
+      &quot;ha_threat_score&quot;: null,
+      &quot;families&quot;: [],
+      &quot;first_seen&quot;: &quot;2026-10-01 06:43:27 UTC&quot;,
+      &quot;observed_techniques&quot;: [
+        {
+          &quot;id&quot;: &quot;T1406&quot;,
+          &quot;description&quot;: &quot;Obfuscates method names&quot;,
+          &quot;source&quot;: &quot;VirusTotal sandbox&quot;
+        },
+        {
+          &quot;id&quot;: &quot;T1421&quot;,
+          &quot;description&quot;: &quot;Checks an internet connection is available&quot;,
+          &quot;source&quot;: &quot;VirusTotal sandbox&quot;
+        },
+        {
+          &quot;id&quot;: &quot;T1430&quot;,
+          &quot;description&quot;: &quot;Queries the phones location (GPS)&quot;,
+          &quot;source&quot;: &quot;VirusTotal sandbox&quot;
+        },
+        {
+          &quot;id&quot;: &quot;T1430&quot;,
+          &quot;description&quot;: &quot;Has permission to query the current location&quot;,
+          &quot;source&quot;: &quot;VirusTotal sandbox&quot;
+        },
+        {
+          &quot;id&quot;: &quot;T1426&quot;,
+          &quot;description&quot;: &quot;Queries the unqiue device ID (IMEI, MEID or ESN)&quot;,
+          &quot;source&quot;: &quot;VirusTotal sandbox&quot;
+        },
+        {
+          &quot;id&quot;: &quot;T1573&quot;,
+          &quot;description&quot;: &quot;Uses HTTPS&quot;,
+          &quot;source&quot;: &quot;VirusTotal sandbox&quot;
+        },
+        {
+          &quot;id&quot;: &quot;T1071&quot;,
+          &quot;description&quot;: &quot;Uses HTTPS&quot;,
+          &quot;source&quot;: &quot;VirusTotal sandbox&quot;
+        }
+      ],
+      &quot;network_flagged&quot;: 0
+    },
+    &quot;elapsed_s&quot;: 60.6
+  },
+  &quot;attack&quot;: [
+    {
+      &quot;technique_id&quot;: &quot;T1071&quot;,
+      &quot;name&quot;: &quot;Application Layer Protocol&quot;,
+      &quot;tactic&quot;: &quot;Command and Control&quot;,
+      &quot;evidence&quot;: [
+        &quot;Uses HTTPS&quot;
+      ],
+      &quot;sources&quot;: [
+        &quot;VirusTotal sandbox&quot;
+      ]
+    },
+    {
+      &quot;technique_id&quot;: &quot;T1406&quot;,
+      &quot;name&quot;: &quot;Obfuscates method names&quot;,
+      &quot;tactic&quot;: &quot;Other&quot;,
+      &quot;evidence&quot;: [
+        &quot;Obfuscates method names&quot;
+      ],
+      &quot;sources&quot;: [
+        &quot;VirusTotal sandbox&quot;
+      ]
+    },
+    {
+      &quot;technique_id&quot;: &quot;T1421&quot;,
+      &quot;name&quot;: &quot;Checks an internet connection is available&quot;,
+      &quot;tactic&quot;: &quot;Other&quot;,
+      &quot;evidence&quot;: [
+        &quot;Checks an internet connection is available&quot;
+      ],
+      &quot;sources&quot;: [
+        &quot;VirusTotal sandbox&quot;
+      ]
+    },
+    {
+      &quot;technique_id&quot;: &quot;T1426&quot;,
+      &quot;name&quot;: &quot;Queries the unqiue device ID (IMEI, MEID or ESN)&quot;,
+      &quot;tactic&quot;: &quot;Other&quot;,
+      &quot;evidence&quot;: [
+        &quot;Queries the unqiue device ID (IMEI, MEID or ESN)&quot;
+      ],
+      &quot;sources&quot;: [
+        &quot;VirusTotal sandbox&quot;
+      ]
+    },
+    {
+      &quot;technique_id&quot;: &quot;T1430&quot;,
+      &quot;name&quot;: &quot;Queries the phones location (GPS)&quot;,
+      &quot;tactic&quot;: &quot;Other&quot;,
+      &quot;evidence&quot;: [
+        &quot;Queries the phones location (GPS)&quot;,
+        &quot;Has permission to query the current location&quot;
+      ],
+      &quot;sources&quot;: [
+        &quot;VirusTotal sandbox&quot;
+      ]
+    },
+    {
+      &quot;technique_id&quot;: &quot;T1573&quot;,
+      &quot;name&quot;: &quot;Uses HTTPS&quot;,
+      &quot;tactic&quot;: &quot;Other&quot;,
+      &quot;evidence&quot;: [
+        &quot;Uses HTTPS&quot;
+      ],
+      &quot;sources&quot;: [
+        &quot;VirusTotal sandbox&quot;
+      ]
+    }
+  ],
+  &quot;risk&quot;: {
+    &quot;score&quot;: 0,
+    &quot;level&quot;: &quot;LOW&quot;,
+    &quot;confidence&quot;: &quot;LOW&quot;,
+    &quot;categories&quot;: {
+      &quot;execution&quot;: 0,
+      &quot;network&quot;: 0,
+      &quot;persistence&quot;: 0,
+      &quot;injection&quot;: 0,
+      &quot;obfuscation&quot;: 0,
+      &quot;evasion&quot;: 0,
+      &quot;anti_analysis&quot;: 0,
+      &quot;credential_access&quot;: 0,
+      &quot;collection&quot;: 0,
+      &quot;impact&quot;: 0,
+      &quot;structure&quot;: 0,
+      &quot;reputation&quot;: 0,
+      &quot;ioc&quot;: 0
+    },
+    &quot;reasons&quot;: [],
+    &quot;verdict_note&quot;: &quot;Score = sum of capped category totals (max 100). Each indicator counts once; repetition is shown as evidence only.&quot;
+  },
+  &quot;analysis_limits&quot;: {
+    &quot;execution&quot;: false,
+    &quot;max_file_mb&quot;: 100,
+    &quot;dynamic_behavior&quot;: &quot;not collected by MAL (sandbox behaviour, if shown, comes from third-party intel)&quot;,
+    &quot;xor_scan_bytes&quot;: 16777216,
+    &quot;notes&quot;: [
+      &quot;Authenticode signatures are detected but not cryptographically validated.&quot;,
+      &quot;Only single-byte XOR is brute-forced; multi-byte / rolling XOR and custom crypto are not decoded.&quot;,
+      &quot;Archives (.7z/.rar/.iso) are identified but their members are not inspected.&quot;
+    ]
+  }
+}</pre></div></details></section>
+<div class="footer">MAL v4.0 &middot; static analysis only, the sample is never executed or uploaded &middot; intel lookups send hashes
+(and IOCs only with --enrich) &middot; third-party data is untrusted and shown escaped.</div></main></div><script>
+function showTab(id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.id==='tab-'+id));
+  document.querySelectorAll('.nav a').forEach(a=>a.classList.toggle('active',a.dataset.tab===id));
+  history.replaceState(null,'','#'+id);window.scrollTo(0,0);
+}
+document.querySelectorAll('.nav a').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();showTab(a.dataset.tab)}));
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-copy]');
+  if(b){const v=b.dataset.copy;(navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).catch(()=>{});
+        b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1200);}
+});
+function filt(inp,tbl){
+  const q=document.getElementById(inp).value.toLowerCase();
+  document.querySelectorAll('#'+tbl+' tbody tr').forEach(r=>{r.style.display=r.innerText.toLowerCase().includes(q)?'':'none'});
+}
+let defanged=true;
+function toggleDefang(btn){
+  defanged=!defanged;
+  document.querySelectorAll('code.ioc').forEach(c=>{c.textContent=defanged?c.dataset.def:c.dataset.raw});
+  btn.textContent=defanged?'Show raw (live) IOCs':'Defang IOCs';
+}
+const start=(location.hash||'#overview').slice(1);
+showTab(document.getElementById('tab-'+start)?start:'overview');
+</script></body></html>

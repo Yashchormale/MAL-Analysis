@@ -1,0 +1,538 @@
+{
+  "type": "bundle",
+  "id": "bundle--8fa2f696-e68f-4af1-90b8-c035ca9dba84",
+  "objects": [
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--fa634ec2-080c-5a88-88cd-75613dbaec3c",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "survey-1761116087028.hta (SHA-256)",
+      "pattern": "[file:hashes.'SHA-256' = '984f722c8d24e9187db77f7b7dc5c7e34b46878ed56e1eb8fd53683132079408']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "file-hash"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--1bf81d81-63ea-58dc-aa02-53a346d6c886",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "survey-1761116087028.hta (SHA-1)",
+      "pattern": "[file:hashes.'SHA-1' = '752275a6a9b5b874111be0f5144603b9fd22b071']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "file-hash"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--79335fb5-9437-5116-90e0-578b407c9737",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "survey-1761116087028.hta (MD5)",
+      "pattern": "[file:hashes.'MD5' = '2493116413135ac6c13b670955d1e46a']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "file-hash"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--0a20c66c-21b3-5d93-b212-cc0134f49aa3",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "url http://survey.bestfestiivalcompany.com/survey_questions.txt",
+      "pattern": "[url:value = 'http://survey.bestfestiivalcompany.com/survey_questions.txt']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "static"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--35b1c1e6-9732-5be9-a8f9-1381d60d85ac",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "url http://survey.bestfestiivalcompany.com/details?u=",
+      "pattern": "[url:value = 'http://survey.bestfestiivalcompany.com/details?u=']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "static"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--1f60cdd3-05ec-5d42-b093-13be072f5e41",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "domain survey.bestfestiivalcompany.com",
+      "pattern": "[domain-name:value = 'survey.bestfestiivalcompany.com']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "static"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--6726e0fb-8d9b-5323-9d24-5d511727379c",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "domain a1672.dscr.akamai.net",
+      "pattern": "[domain-name:value = 'a1672.dscr.akamai.net']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "intel:virustotal-sandbox"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--3918417a-2a3b-502c-9428-08293740d41a",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "domain bg.microsoft.map.fastly.net",
+      "pattern": "[domain-name:value = 'bg.microsoft.map.fastly.net']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "intel:virustotal-sandbox"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--dae3c4f2-b96b-5aa8-a30e-5ab6dc98e537",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "domain edgecdn-embza6g8cacagcbn.z01.azurefd.net",
+      "pattern": "[domain-name:value = 'edgecdn-embza6g8cacagcbn.z01.azurefd.net']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "intel:virustotal-sandbox"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--fa767efe-4040-5bc0-963a-96a2455125cf",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "domain nexusrules.officeapps.live.com",
+      "pattern": "[domain-name:value = 'nexusrules.officeapps.live.com']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "intel:virustotal-sandbox"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--8e4b152a-44f2-5456-9811-e602a60c75fc",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "domain windows.msn.com-ion.edgesuite.net",
+      "pattern": "[domain-name:value = 'windows.msn.com-ion.edgesuite.net']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "intel:virustotal-sandbox"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--844c63cf-cc2e-54f9-ba89-b51ccba71b08",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "domain www.bing.com",
+      "pattern": "[domain-name:value = 'www.bing.com']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "intel:virustotal-sandbox"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--eaa390b6-a4fe-54d2-b9f6-6b613c0d6e72",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "ip 13.107.213.70",
+      "pattern": "[ipv4-addr:value = '13.107.213.70']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "intel:virustotal-sandbox"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--d002de6f-54a5-5f3c-bea9-ef996d736181",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "ip 13.107.246.70",
+      "pattern": "[ipv4-addr:value = '13.107.246.70']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "intel:virustotal-sandbox"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--1e79390e-ea9d-56a5-9d5c-faace83da920",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "ip 199.232.210.172",
+      "pattern": "[ipv4-addr:value = '199.232.210.172']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "intel:virustotal-sandbox"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--857ebf49-f4fc-529c-ae5f-c254f73c8fcf",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "ip 199.232.214.172",
+      "pattern": "[ipv4-addr:value = '199.232.214.172']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "intel:virustotal-sandbox"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--403c9e41-917d-5e4e-a180-74b488260f2b",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "ip 23.14.141.249",
+      "pattern": "[ipv4-addr:value = '23.14.141.249']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "intel:virustotal-sandbox"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--eadf9ef3-d47a-5305-8eb6-dbb04fda0d4b",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "ip 23.195.81.144",
+      "pattern": "[ipv4-addr:value = '23.195.81.144']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "intel:virustotal-sandbox"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--f44dfdfa-9b24-5c4b-a084-1fb8e420afaa",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "ip 23.195.81.146",
+      "pattern": "[ipv4-addr:value = '23.195.81.146']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "intel:virustotal-sandbox"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--bf501ab4-6817-5014-9110-2a28b77c9f43",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "ip 23.195.81.152",
+      "pattern": "[ipv4-addr:value = '23.195.81.152']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "intel:virustotal-sandbox"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--08c2a767-bbc5-575c-af93-4c2fcb15f4af",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "ip 23.195.81.154",
+      "pattern": "[ipv4-addr:value = '23.195.81.154']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "intel:virustotal-sandbox"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--e7abf594-54b0-5e64-a8de-cc98f4483418",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "ip 23.195.81.162",
+      "pattern": "[ipv4-addr:value = '23.195.81.162']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "intel:virustotal-sandbox"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--d398806c-5779-5432-a2d1-9d7e7394490b",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "ip 23.195.81.163",
+      "pattern": "[ipv4-addr:value = '23.195.81.163']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "intel:virustotal-sandbox"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--d31913e2-974a-5678-bf8c-548b30d19bcd",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "ip 23.195.81.59",
+      "pattern": "[ipv4-addr:value = '23.195.81.59']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "intel:virustotal-sandbox"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--c203ad38-d6c7-50e8-9a7c-f6357b3b4e39",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "ip 23.195.81.73",
+      "pattern": "[ipv4-addr:value = '23.195.81.73']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "intel:virustotal-sandbox"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--cf1a8962-f369-519c-9afd-bd2e214e913c",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "ip 23.60.131.209",
+      "pattern": "[ipv4-addr:value = '23.60.131.209']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "intel:virustotal-sandbox"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--87b31b2a-4eaf-5646-979b-07df352cb475",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "ip 52.111.227.11",
+      "pattern": "[ipv4-addr:value = '52.111.227.11']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "intel:virustotal-sandbox"
+      ],
+      "confidence": 71
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--13a4f925-4b04-54b8-9146-1e94eea65dba",
+      "created": "2026-10-26T05:44:52.000Z",
+      "modified": "2026-10-26T05:44:52.000Z",
+      "name": "ip 52.111.229.43",
+      "pattern": "[ipv4-addr:value = '52.111.229.43']",
+      "pattern_type": "stix",
+      "valid_from": "2026-10-26T05:44:52.000Z",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "labels": [
+        "mal-v4",
+        "intel:virustotal-sandbox"
+      ],
+      "confidence": 71
+    }
+  ]
+}

